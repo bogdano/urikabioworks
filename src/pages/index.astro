@@ -1,5 +1,5 @@
 ---
-
+import '../../public/urika.css'
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -12,17 +12,17 @@
 		<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 	</head>
 	<body class="flex flex-col justify-center items-center h-dvh bg-stone-100">
-        <svg class="opacity-0 max-w-[90%] max-h-[80%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <svg class="fade-in max-w-[90%] max-h-[80%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <image href="logo.svg" x="5" y="5" width="90" height="90" />
         </svg>
 	</body>
-	<script type="module">
-	  const { animate, inView } = Motion
-      inView("svg", ({ target }) => {
+	<script is:inline type="module">
+   	    const { animate, inView } = Motion
+        inView(".fade-in", ({ target }) => {
         animate(target,
-    		{ opacity: [0, 1], y: [50, 0] },
-    		{ duration: 0.6, easing: [.17,.67,.83,.67] }
-       	);
-      })
+      		{ opacity: [0.1, 1], y: [30, 0] },
+      		{ duration: 0.5, ease: 'easeOut' }
+         	);
+        })
     </script>
 </html>
