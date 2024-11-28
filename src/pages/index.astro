@@ -9,18 +9,19 @@
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>URIKA [bioworks]</title>
+		<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
 	</head>
 	<body class="flex flex-col justify-center items-center h-dvh bg-stone-100">
-        <svg class="max-w-[90%] max-h-[80%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <svg class="opacity-0 max-w-[90%] max-h-[80%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <image href="logo.svg" x="5" y="5" width="90" height="90" />
         </svg>
 	</body>
 	<script type="module">
-      import { animate, inView } from "https://cdn.jsdelivr.net/npm/framer-motion@11.11.11/dom/+esm";
+	  const { animate, inView } = Motion
       inView("svg", ({ target }) => {
         animate(target,
     		{ opacity: [0, 1], y: [50, 0] },
-    		{ duration: 0.5, easing: [0.17, 0.55, 0.55, 1] }
+    		{ duration: 0.6, easing: [.17,.67,.83,.67] }
        	);
       })
     </script>
