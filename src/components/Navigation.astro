@@ -1,0 +1,60 @@
+---
+const { menu_items, logo } = Astro.props
+---
+
+<nav>
+  <button class="menu-btn mobile-only" id="menu-button" aria-label="Menu">
+    <span class="menu-btn__burger"></span>
+  </button>
+
+  <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
+    <div id="main-navigation">
+        <ul class="nav-buttons flex gap-4">
+            {menu_items.map((item) => (
+                <li class="hover:bg-urika-orange-100 rounded-full transition">
+                    { item.permalink === Astro.url.pathname ? (
+                        <span class="block w-full px-4 py-2 bg-urika-orange-300 rounded-full cursor-pointer">{item.title}</span>
+                    ) : (
+                        <a class="block px-4 py-2" href={item.permalink}>{item.title}</a>
+                    )}
+                </li>
+            ))}
+        </ul>
+    </div>
+    <div id="secondary-navigation" class="mobile-only flex justify-end">
+        <image src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-12" />
+    </div>
+  </div>
+
+  <div class="overlay mobile-only" id="overlay"></div>
+</nav>
+
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+      toggleMenu();
+  });
+
+  function toggleMenu() {
+    const menuButton = document.getElementById('menu-button');
+    const navWrapper = document.getElementById('nav-wrapper');
+    const overlay = document.getElementById('overlay');
+    let menuOpen = false;
+
+    // Toggle menu
+    menuButton.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      menuButton.classList.toggle('open', menuOpen);
+      navWrapper.classList.toggle('open', menuOpen);
+      overlay.classList.toggle('open', menuOpen);
+    });
+
+    // Close menu when clicking outside
+    overlay.addEventListener('click', () => {
+      menuOpen = false;
+      menuButton.classList.remove('open');
+      navWrapper.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  }
+</script>

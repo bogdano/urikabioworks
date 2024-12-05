@@ -1,0 +1,17 @@
+---
+const { blocks } = Astro.props;
+
+// import all possible block components
+import Hero from '../components/blocks/Hero.astro';
+import Expertise from '../components/blocks/Expertise.astro';
+
+const blockComponents = {
+  block_hero: Hero,
+  block_expertise: Expertise,
+};
+---
+
+{blocks.map((block) => {
+  const BlockComponent = blockComponents[block.collection];
+  return BlockComponent ? <BlockComponent {...block.item} /> : null;
+})}

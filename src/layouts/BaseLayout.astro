@@ -1,0 +1,58 @@
+---
+import '../styles/urika.css'
+import { ViewTransitions } from 'astro:transitions';
+import Navigation from '../components/Navigation.astro';
+const { title } = Astro.props
+const { description } = Astro.props
+import directus from "../../lib/directus"
+import {  readSingleton } from '@directus/sdk';
+const global = await directus.request(readSingleton("global", {
+    fields: [
+        "title", "seo_description", "logo",
+        {
+          main_menu: [
+            "title", "permalink", "status"
+          ],
+        },
+    ],
+}))
+const menu_items = global.main_menu.filter((item) => item.status === "published")
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{title}</title>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={"https://admin.urikabioworks.com/assets/" + global.logo} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+		<noscript>
+            <style>
+                .fade-in {
+                    opacity: 1;
+                }
+            </style>
+        </noscript>
+        <ViewTransitions />
+	</head>
+	<body>
+	    <Navigation menu_items={menu_items} logo={global.logo} />
+		<div style="height: 70px;">
+            <!-- Spacer -->
+        </div>
+	    <article>
+            <slot />
+        </article>
+	</body>
+	<script type="module" data-astro-rerun>
+   	    const { animate, inView } = Motion
+        inView(".fade-in", ({ target }) => {
+        animate(target,
+      		{ opacity: [0, 1], y: [30, 0] },
+      		{ duration: 0.6, ease: 'easeOut' }
+         	);
+        })
+    </script>
+</html>

@@ -11,5 +11,6 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [tailwind(), sitemap()],
   output: 'hybrid',
-  adapter: cloudflare()
+  adapter: cloudflare(),
+  prefetch: true
 });

@@ -1,0 +1,44 @@
+---
+import "../styles/urika.css"
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageBuilder from '../components/PageBuilder.astro'
+import directus from "../../lib/directus"
+import { readItems, readSingleton } from '@directus/sdk';
+const global = await directus.request(readSingleton("global", { fields: ["title", "seo_description"] }))
+
+export async function getStaticPaths() {
+  const pages = await directus.request(readItems("pages", {
+    filter: {
+      status: { _eq: "published" },
+    },
+    fields: [
+      "title", "permalink", "seo_description",
+      {
+        blocks: [
+          "*",
+          {
+            item: {
+              block_hero: ["image", "title", "subtitle", "tagline"],
+              block_expertise: ["title",
+                {
+                  expertise_items: ["image", "content"],
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  }))
+  return pages.map((page) => ({
+    params: { permalink: page.permalink },
+    props: page,
+  }))
+}
+const page = Astro.props
+---
+
+<BaseLayout title={ page.permalink === "/" ? global.title : "URIKA [" + page.title.toLowerCase() + "]" } description={page.seo_description || global.seo_description}>
+    <PageBuilder blocks={page.blocks} />
+    <!-- <pre>{JSON.stringify(page, null, 2)}</pre> -->
+</BaseLayout>

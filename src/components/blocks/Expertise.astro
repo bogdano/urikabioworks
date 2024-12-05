@@ -1,0 +1,8 @@
+---
+const { title, expertise_items } = Astro.props;
+---
+
+<div class="flex flex-col gap-2 items-center justify-center fade-in">
+    <p class="font-urika text-urika-gray-400 text-5xl">{title}</p>
+    <p class="font-touche text-urika-gray-400">{JSON.stringify(expertise_items)}</p>
+</div>
