@@ -3,7 +3,7 @@ const { image, title, subtitle, tagline } = Astro.props;
 ---
 
 <div class="hero-block relative flex flex-col gap-2 items-center justify-center fade-in">
-    <image class="object-fill w-56 mb-4" src={`https://admin.urikabioworks.com/assets/${image}`} alt="Hero Image" loading="lazy" />
+    <img class="object-fill w-56 mb-4" src={`https://admin.urikabioworks.com/assets/${image}`} alt="Hero Image" loading="lazy" />
     <p class="font-urika text-urika-gray-400 text-8xl">{title}</p>
     <p class="font-touche-medium text-urika-gray-400 tracking-widest text-5xl">{subtitle}</p>
     <p class="font-touche text-urika-gray-400 text-2xl mb-12">{tagline}</p>
