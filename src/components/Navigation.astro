@@ -12,10 +12,10 @@ const currentPath = normalizeUrl(Astro.url.pathname);
         <span class="menu-btn__burger"></span>
     </button>
 
-    <div id="upper-logo" class="flex items-center mx-auto pr-12 mobile-only opacity-0 transition-opacity duration-500">
+    <a href="/" id="upper-logo" class="flex items-center mx-auto pr-12 mobile-only opacity-0 transition-opacity duration-500">
         <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-8" />
         <span class="text-urika-gray-400 font-urika text-lg font-semibold ml-2">URIKA</span>
-    </div>
+    </a>
 
     <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
         <div id="main-navigation">

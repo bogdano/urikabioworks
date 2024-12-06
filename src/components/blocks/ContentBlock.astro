@@ -1,11 +1,11 @@
 ---
 const { content } = Astro.props
 ---
-<div class="fade-in text-urika-gray-500 text-xl flex flex-col h-dvh gap-4 mt-36 text-pretty">
+<div class="fade-in text-urika-gray-500 text-xl flex flex-col h-dvh gap-4 mt-28 text-pretty">
     <h1 class="text-urika-blue-800 text-5xl uppercase font-extrabold text-center mb-6">
         MISSION OF <span class="font-urika text-4xl ml-2 text-urika-orange-500">URIKA</span><span class="font-touche text-4xl text-urika-blue-400"> [bioworks]</span>
     </h1>
-    <div class="flex flex-col gap-8 md:text-2xl text-xl *:indent-24 *:text-pretty">
+    <div class="flex flex-col gap-8 md:text-2xl text-lg md:*:indent-24 *:text-pretty">
         <Fragment set:html={content} />
     </div>
 </div>
