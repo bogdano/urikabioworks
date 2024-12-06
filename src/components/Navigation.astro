@@ -8,7 +8,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
 ---
 
 <nav>
-  <button class="menu-btn mobile-only p-4 pl-2 rounded-full" id="menu-button" aria-label="Menu">
+  <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
     <span class="menu-btn__burger"></span>
   </button>
 
@@ -31,35 +31,56 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     </div>
   </div>
 
-  <div class="overlay mobile-only h-dvh" id="overlay"></div>
+  <div class="overlay mobile-only" id="overlay"></div>
 </nav>
-
 
 <script>
   document.addEventListener('astro:page-load', () => {
-      toggleMenu();
+      mountMenuListeners();
   });
 
-  function toggleMenu() {
+  const mountMenuListeners = () => {
     const menuButton = document.getElementById('menu-button');
     const navWrapper = document.getElementById('nav-wrapper');
     const overlay = document.getElementById('overlay');
     let menuOpen = false;
 
-    // Toggle menu
+    const openMenu = () => {
+      menuOpen = true;
+      const { documentElement: html } = document;
+      const scrollbarWidth = getScrollbarWidth();
+      if (scrollbarWidth) {
+        html.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+      }
+      html.classList.add('menu-is-open');
+      menuButton.classList.add('open');
+      navWrapper.classList.add('open');
+      overlay.classList.add('open');
+    };
+
+    const closeMenu = () => {
+      menuOpen = false;
+      const { documentElement: html } = document;
+      html.classList.remove('menu-is-open');
+      menuButton.classList.remove('open');
+      navWrapper.classList.remove('open');
+      overlay.classList.remove('open');
+    };
+
+    // Toggle menu with button
     menuButton.addEventListener('click', () => {
-      menuOpen = !menuOpen;
-      menuButton.classList.toggle('open', menuOpen);
-      navWrapper.classList.toggle('open', menuOpen);
-      overlay.classList.toggle('open', menuOpen);
+      menuOpen ? closeMenu() : openMenu();
     });
 
     // Close menu when clicking outside
     overlay.addEventListener('click', () => {
-      menuOpen = false;
-      menuButton.classList.remove('open');
-      navWrapper.classList.remove('open');
-      overlay.classList.remove('open');
+      closeMenu();
     });
+
+    // Get scrollbar width
+    const getScrollbarWidth = () => {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      return scrollbarWidth;
+    };
   }
 </script>
