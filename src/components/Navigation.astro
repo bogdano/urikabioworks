@@ -7,34 +7,51 @@ const currentPath = normalizeUrl(Astro.url.pathname);
 
 ---
 
-<nav class="fixed top-0 flex gap-8 justify-between items-center px-4 py-8 z-50 h-16 bg-white w-full">
-  <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
-    <span class="menu-btn__burger"></span>
-  </button>
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-4 z-50 bg-white/80 w-full shadow-urika-gray-50 transition-shadow backdrop-blur-md border-b border-white">
+    <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
+        <span class="menu-btn__burger"></span>
+    </button>
 
-  <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
-    <div id="main-navigation">
-        <ul class="nav-buttons flex gap-4">
-            {menu_items.map((item) => (
-                <li class="hover:bg-urika-orange-100 rounded-full transition">
-                    { normalizeUrl(item.permalink) === currentPath ? (
-                        <span class="block w-full px-4 py-2 bg-urika-orange-300 rounded-full cursor-pointer">{item.title}</span>
-                    ) : (
-                        <a class="block px-4 py-2" href={item.permalink}>{item.title}</a>
-                    )}
-                </li>
-            ))}
-        </ul>
+    <div id="upper-logo" class="flex items-center mx-auto pr-12 mobile-only opacity-0 transition-opacity duration-500">
+        <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-8" />
+        <span class="text-urika-gray-400 font-urika text-lg font-semibold ml-2">URIKA</span>
     </div>
-    <div id="secondary-navigation" class="mobile-only flex justify-end">
-        <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-12" />
-    </div>
-  </div>
 
-  <div class="overlay mobile-only" id="overlay"></div>
+    <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
+        <div id="main-navigation">
+            <ul class="nav-buttons flex gap-4 text-urika-gray-600 text-base font-semibold">
+                {menu_items.map((item) => (
+                    <li class="hover:bg-urika-orange-400 hover:text-white rounded-full transition">
+                        { normalizeUrl(item.permalink) === currentPath ? (
+                            <span class="block w-full px-4 py-2 bg-urika-gray-600 rounded-full cursor-pointer text-white uppercase">{item.title}</span>
+                        ) : (
+                            <a class="block px-4 py-2 uppercase" href={item.permalink}>{item.title}</a>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+        <div id="secondary-navigation" class="mobile-only flex justify-end">
+            <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-12" />
+        </div>
+    </div>
+
+    <div class="overlay mobile-only" id="overlay"></div>
 </nav>
 
 <script>
+  document.addEventListener('scroll', () => {
+    const navigation = document.getElementById('navigation');
+    const upperLogo = document.getElementById('upper-logo');
+    if (window.scrollY > 0) {
+      navigation.classList.add('shadow');
+      upperLogo.classList.add('opacity-100');
+    } else {
+      navigation.classList.remove('shadow');
+      upperLogo.classList.remove('opacity-100');
+    }
+  });
+
   document.addEventListener('astro:page-load', () => {
       mountMenuListeners();
   });

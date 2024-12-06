@@ -30,29 +30,39 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 		<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
 		<noscript>
             <style>
-                .fade-in {
+                .fade-up, .fade-up, .fade-left {
                     opacity: 1;
                 }
             </style>
         </noscript>
         <ViewTransitions />
 	</head>
-	<body class="md:mx-24">
+	<body>
 	    <Navigation menu_items={menu_items} logo={global.logo} />
-		<div style="height: 70px;">
-            <!-- Spacer -->
-        </div>
-	    <article>
+	    <article class="max-w-6xl mx-auto md:px-0 px-8 w-full">
             <slot />
         </article>
 	</body>
 	<script type="module" data-astro-rerun>
-   	    const { animate, inView } = Motion
+   	    const { animate, inView, stagger } = Motion
+        inView(".fade-up", ({ target }) => {
+          animate(target,
+        		{ opacity: [0, 1], y: [30, 0] },
+        		{ duration: 0.6, ease: 'easeOut' }
+          );
+        })
         inView(".fade-in", ({ target }) => {
-        animate(target,
-      		{ opacity: [0, 1], y: [30, 0] },
-      		{ duration: 0.6, ease: 'easeOut' }
-         	);
+            animate(target,
+          		{ opacity: [0, 1]},
+          		{ duration: 0.6, ease: 'easeOut' },
+                { delay: stagger(0.9) }
+            );
+        })
+        inView(".fade-left", ({ target }) => {
+            animate(target,
+                { opacity: [0, 1], x: [-15, 0] },
+                { duration: 0.9, ease: [0.39, 0.24, 0.3, 1] }
+            );
         })
     </script>
 </html>

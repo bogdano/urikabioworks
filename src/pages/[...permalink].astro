@@ -24,6 +24,12 @@ export async function getStaticPaths() {
                   expertise_items: ["image", "content"],
                 },
               ],
+              block_offerings: ["title",
+                {
+                    offerings: ["title", "paragraph_1", "paragraph_2", "link"],
+                },
+              ],
+              block_html: ["content"],
             },
           },
         ],
@@ -40,5 +46,4 @@ const page = Astro.props
 
 <BaseLayout title={ page.permalink === "/" ? global.title : "URIKA [" + page.title.toLowerCase() + "]" } description={page.seo_description || global.seo_description}>
     <PageBuilder blocks={page.blocks} />
-    <!-- <pre>{JSON.stringify(page, null, 2)}</pre> -->
 </BaseLayout>

@@ -4,10 +4,14 @@ const { blocks } = Astro.props;
 // import all possible block components
 import Hero from '../components/blocks/Hero.astro';
 import Expertise from '../components/blocks/Expertise.astro';
+import Offerings from '../components/blocks/Offerings.astro';
+import ContentBlock from '../components/blocks/ContentBlock.astro';
 
 const blockComponents = {
   block_hero: Hero,
   block_expertise: Expertise,
+  block_offerings: Offerings,
+  block_html: ContentBlock,
 };
 ---
 

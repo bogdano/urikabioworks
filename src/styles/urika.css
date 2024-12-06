@@ -45,12 +45,11 @@
   background: #fde2ab;
 }
 
-.fade-in {
+.fade-in, .fade-up, .fade-left {
     opacity: 0;
 }
 
 .menu-btn {
-	user-select: none;
 	position: relative;
 	display: flex;
 	z-index: 999;
