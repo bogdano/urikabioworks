@@ -1,9 +1,14 @@
 ---
 const { menu_items, logo } = Astro.props
+function normalizeUrl(url) {
+    return url.replace(/\/$/, "");
+}
+const currentPath = normalizeUrl(Astro.url.pathname);
+
 ---
 
 <nav>
-  <button class="menu-btn mobile-only" id="menu-button" aria-label="Menu">
+  <button class="menu-btn mobile-only p-4 pl-2 rounded-full" id="menu-button" aria-label="Menu">
     <span class="menu-btn__burger"></span>
   </button>
 
@@ -12,7 +17,7 @@ const { menu_items, logo } = Astro.props
         <ul class="nav-buttons flex gap-4">
             {menu_items.map((item) => (
                 <li class="hover:bg-urika-orange-100 rounded-full transition">
-                    { item.permalink === Astro.url.pathname ? (
+                    { normalizeUrl(item.permalink) === currentPath ? (
                         <span class="block w-full px-4 py-2 bg-urika-orange-300 rounded-full cursor-pointer">{item.title}</span>
                     ) : (
                         <a class="block px-4 py-2" href={item.permalink}>{item.title}</a>
