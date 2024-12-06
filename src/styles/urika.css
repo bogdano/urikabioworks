@@ -50,7 +50,7 @@
 }
 
 .hero-block {
-    min-height: calc(100dvh - 70px);
+    min-height: calc(100svh - 70px);
 }
 
 .menu-btn {
@@ -168,7 +168,7 @@ nav {
 	.nav-wrapper {
 		flex-direction: column;
 		gap: 0.5rem;
-		height: 100svh;
+		height: 100dvh;
 		margin: 0 auto;
 		position: fixed;
 		width: 20rem;
