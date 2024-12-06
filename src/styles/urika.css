@@ -49,10 +49,6 @@
     opacity: 0;
 }
 
-.hero-block {
-    min-height: calc(100svh - 70px);
-}
-
 .menu-btn {
 	user-select: none;
 	position: relative;
@@ -106,20 +102,6 @@
 }
 .menu-btn.open .menu-btn__burger::after {
 	transform: rotate(-45deg) translate(10px, 10px);
-}
-
-nav {
-	position: fixed;
-	top: 0;
-	display: flex;
-	gap: 2rem;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1rem 2rem;
-	z-index: 666;
-	height: 70px;
-	background-color: white;
-	width: 100%;
 }
 
 #main-navigation {
@@ -185,9 +167,7 @@ nav {
 		justify-content: space-between;
 	}
 
-	nav {
-		justify-content: normal;
-	}
+
 
 	.nav-buttons {
 		flex-direction: column;
