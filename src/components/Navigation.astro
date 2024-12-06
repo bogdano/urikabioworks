@@ -58,6 +58,12 @@ const currentPath = normalizeUrl(Astro.url.pathname);
       overlay.classList.add('open');
     };
 
+    // Get scrollbar width
+    const getScrollbarWidth = () => {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      return scrollbarWidth;
+    };
+
     const closeMenu = () => {
       menuOpen = false;
       const { documentElement: html } = document;
@@ -76,11 +82,5 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     overlay.addEventListener('click', () => {
       closeMenu();
     });
-
-    // Get scrollbar width
-    const getScrollbarWidth = () => {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      return scrollbarWidth;
-    };
   }
 </script>
