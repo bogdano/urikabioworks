@@ -110,6 +110,7 @@
 }
 
 .overlay {
+    display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -165,8 +166,6 @@
 		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 		justify-content: space-between;
 	}
-
-
 
 	.nav-buttons {
 		flex-direction: column;

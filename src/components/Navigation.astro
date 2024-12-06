@@ -72,6 +72,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
       html.classList.add('menu-is-open');
       menuButton.classList.add('open');
       navWrapper.classList.add('open');
+      overlay.style.setProperty('display', 'block');
       overlay.classList.add('open');
     };
 
@@ -88,6 +89,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
       menuButton.classList.remove('open');
       navWrapper.classList.remove('open');
       overlay.classList.remove('open');
+      overlay.style.setProperty('display', 'none');
     };
 
     // Toggle menu with button
