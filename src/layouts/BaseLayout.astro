@@ -24,7 +24,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 		<title>{title}</title>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href={"https://admin.urikabioworks.com/assets/" + global.logo} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
@@ -37,7 +37,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
         </noscript>
         <ViewTransitions />
 	</head>
-	<body>
+	<body class="md:mx-24">
 	    <Navigation menu_items={menu_items} logo={global.logo} />
 		<div style="height: 70px;">
             <!-- Spacer -->
