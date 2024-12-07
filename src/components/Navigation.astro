@@ -7,7 +7,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
 
 ---
 
-<nav id="navigation" class="fixed top-0 flex items-center px-4 py-4 z-50 bg-white/80 w-full shadow-urika-gray-50 transition-shadow backdrop-blur-md border-b border-white">
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-3 z-50 bg-white/80 w-full shadow-urika-gray-50 transition-shadow backdrop-blur border-b border-white">
     <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
         <span class="menu-btn__burger"></span>
     </button>
@@ -44,10 +44,10 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     const navigation = document.getElementById('navigation');
     const upperLogo = document.getElementById('upper-logo');
     if (window.scrollY > 0) {
-      navigation.classList.add('shadow');
+      navigation.classList.add('shadow-md');
       upperLogo.classList.add('opacity-100');
     } else {
-      navigation.classList.remove('shadow');
+      navigation.classList.remove('shadow-md');
       upperLogo.classList.remove('opacity-100');
     }
   });
