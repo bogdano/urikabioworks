@@ -6,20 +6,20 @@ const { image, title, subtitle, tagline } = Astro.props;
         min-height: 100svh;
     }
     .logo-title {
-        font-size: clamp(4rem, 8vw, 7rem);
+        font-size: clamp(5rem, 7vw, 8rem);
         line-height: 0.85em;
     }
     .logo-subtitle {
-        font-size: clamp(1.75rem, 3.5vw, 3.1rem);
+        font-size: clamp(2.2rem, 3.05vw, 3.5rem);
         letter-spacing: 0.35em;
         line-height: 1.2em;
     }
     .logo-tagline {
-        font-size: clamp(1.2rem, 2vw, 1.8rem);
+        font-size: clamp(1.25rem, 1.75vw, 2rem);
         line-height: 2em;
     }
     .left-bracket, .right-bracket {
-        font-size: clamp(2rem, 3.5vw, 3.75rem);
+        font-size: clamp(2.25rem, 3.25vw, 3.75rem);
     }
     .left-bracket {
         line-height: 2rem;
@@ -30,19 +30,30 @@ const { image, title, subtitle, tagline } = Astro.props;
     }
 </style>
 
-<div class="hero-block h-dvh flex flex-col items-center fade-up">
-    <div class="flex-grow flex flex-col items-center justify-center">
-        <img class="lg:w-56 md:w-44 w-36 transition mb-12 mt-24" src={`https://admin.urikabioworks.com/assets/${image}`} alt="Hero Image" loading="lazy" />
+<div class="hero-block min-h-dvh flex flex-col items-center fade-up">
+    <div class="flex-grow flex flex-col items-center justify-center mb-8">
+        <img class="2xl:w-64 lg:w-56 w-48 transition mb-12 mt-16" src={`https://admin.urikabioworks.com/assets/${image}`} alt="Hero Image" loading="lazy" />
         <h1 class="text-center">
             <span class="font-urika text-urika-gray-400 logo-title mb-3 block">{title}</span>
             <span class="left-bracket font-touche text-urika-gray-400">[</span>
-            <span class="font-touche-medium text-urika-gray-400 logo-subtitle">{subtitle}</span>
+            <span class="font-touche bold text-urika-gray-400 logo-subtitle">{subtitle}</span>
             <span class="right-bracket font-touche text-urika-gray-400">]</span>
             <span class="font-touche text-urika-gray-400 logo-tagline block">{tagline}</span>
         </h1>
     </div>
-    <button id="scrollDownButton" class="w-12 h-12 mb-8 cursor-pointer" aria-label="Scroll Down">
-        <svg viewBox="0 -5 24 24" class="fill-urika-orange-400 h-9 w-9" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g id="Icon-Set" transform="translate(-572.000000, -1200.000000)"> <path d="M595.688,1200.28 C595.295,1199.89 594.659,1199.89 594.268,1200.28 L583.984,1211.57 L573.702,1200.28 C573.31,1199.89 572.674,1199.89 572.282,1200.28 C571.89,1200.68 571.89,1201.32 572.282,1201.71 L583.225,1213.72 C583.434,1213.93 583.711,1214.02 583.984,1214 C584.258,1214.02 584.535,1213.93 584.745,1213.72 L595.688,1201.71 C596.079,1201.32 596.079,1200.68 595.688,1200.28" id="chevron-down"> </path> </g> </g> </g></svg>
+    <button id="scrollDownButton" class="w-12 h-12 mb-8 cursor-pointer outline-none" aria-label="Scroll Down">
+        <svg class="h-10 w-10" viewBox="0 0 26.336874 14.60877" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+            <g transform="translate(-7.5397891,-119.59028)">
+                <g>
+                <path
+                    style="fill:#27a9e0;stroke-width:0.264583"
+                    d="m 7.610878,121.15278 13.010734,13.01073 1.367736,-1.36774 -13.1026825,-13.10268 z" />
+                <path
+                    style="fill:#f6931d;stroke-width:0.264583;fill-opacity:1"
+                    d="m 32.44291,119.60225 1.275391,1.45899 -11.146485,11.14648 -1.36914,-1.36718 z" />
+                </g>
+            </g>
+        </svg>
     </button>
 </div>
 

@@ -9,9 +9,9 @@ const { content } = Astro.props
 </script>
 <div class="text-urika-gray-500 text-xl flex flex-col h-dvh gap-4 my-28 text-pretty">
     <h1 class="fade-in text-urika-blue-800 text-5xl uppercase font-extrabold text-center mb-6">
-        MISSION OF <span class="font-urika text-4xl ml-2 text-urika-orange-500">URIKA</span><span class="font-touche text-4xl text-urika-blue-400"> [bioworks]</span>
+        MISSION OF <span class="font-urika text-4xl ml-2 text-urika-orange-500">URIKA</span><span class="font-touche font-medium text-4xl text-urika-blue-400"> [bioworks]</span>
     </h1>
-    <div id="content" class="flex flex-col gap-8 md:text-2xl text-lg text-justify md:mx-16 md:*:indent-12 *:text-pretty">
+    <div id="content" class="font-touche flex flex-col gap-8 md:text-2xl text-lg md:text-justify text-balance md:mx-16 md:*:indent-12 *:text-pretty">
         <Fragment set:html={content} />
     </div>
     <hr class="w-1/2 border-urika-orange-400 mx-auto mb-24 mt-12" />

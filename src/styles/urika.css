@@ -12,14 +12,21 @@
 @font-face {
     font-family: 'Touche';
     src: url('../fonts/touche.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Touche';
     src: url('../fonts/touche-medium.woff2') format('woff2');
-    font-weight: bold;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Touche';
+    src: url('../fonts/touche-bold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
@@ -30,11 +37,6 @@
 
 .font-touche {
     font-family: 'Touche', sans-serif;
-}
-
-.font-touche-medium {
-    font-family: 'Touche', sans-serif;
-    font-weight: bold;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -65,8 +67,8 @@
 .menu-btn__burger,
 .menu-btn__burger::before,
 .menu-btn__burger::after {
-	width: 24px;
-	height: 2px;
+	width: 1.5rem;
+	height: 0.125rem;
 	border-radius: 0.25rem;
 	background: black;
 	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -119,11 +121,11 @@
 	background-color: black;
 	opacity: 0;
 	z-index: 88;
-	transition: opacity 0.3s;
+	transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .overlay.open {
-    opacity: 0.1;
+    opacity: 0.4;
 }
 
 .menu-is-open {
