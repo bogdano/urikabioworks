@@ -67,9 +67,8 @@
 .menu-btn__burger,
 .menu-btn__burger::before,
 .menu-btn__burger::after {
-	width: 1.5rem;
-	height: 0.125rem;
-	border-radius: 0.25rem;
+	width: 2rem;
+	height: 0.15rem;
 	background: black;
 	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -87,10 +86,10 @@
 	position: absolute;
 }
 .menu-btn__burger::before {
-	transform: translateY(-6.5px);
+	transform: translateY(-8px);
 }
 .menu-btn__burger::after {
-	transform: translateY(6.5px);
+	transform: translateY(8px);
 }
 /* ANIMATION */
 .menu-btn.open .menu-btn__burger {
@@ -121,7 +120,7 @@
 	background-color: black;
 	opacity: 0;
 	z-index: 88;
-	transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .overlay.open {

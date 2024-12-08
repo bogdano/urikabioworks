@@ -7,16 +7,15 @@ const currentPath = normalizeUrl(Astro.url.pathname);
 
 ---
 
-<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2 z-50 bg-white/80 w-full shadow-urika-gray-50 transition-shadow backdrop-blur border-b border-white">
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 w-full  transition-shadow backdrop-blur border-b border-white">
     <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
         <span class="menu-btn__burger"></span>
     </button>
 
     <a href="/" id="upper-logo" class="flex items-center mx-auto opacity-0 transition-opacity duration-500 md:pl-4">
         <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-8" />
-        <span class="text-urika-gray-400 font-urika text-lg font-semibold ml-2">URIKA</span>
+        <span class="text-urika-gray-400 font-urika text-xl font-semibold ml-2">URIKA</span>
     </a>
-
 
     <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
         <div id="main-navigation">
@@ -46,10 +45,10 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     const navigation = document.getElementById('navigation');
     const upperLogo = document.getElementById('upper-logo');
     if (window.scrollY > 0) {
-      navigation.classList.add('shadow');
+      navigation.classList.add('shadow-md');
       upperLogo.classList.add('opacity-100');
     } else {
-      navigation.classList.remove('shadow');
+      navigation.classList.remove('shadow-md');
       upperLogo.classList.remove('opacity-100');
     }
   });
