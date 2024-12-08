@@ -12,7 +12,6 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^11.2.0",
-    "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@directus/sdk": "^18.0.0",
     "astro": "^4.16.16",
