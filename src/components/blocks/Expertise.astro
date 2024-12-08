@@ -8,7 +8,7 @@ const { title, expertise_items } = Astro.props;
         {expertise_items.map((item, index) => (
             <div class={`fade-up flex flex-col md:flex-row ${index % 2 !== 0 ? 'md:flex-row-reverse md:text-right' : ''} items-center md:items-center justify-center gap-12`}>
                 <img class="w-24 h-24 opacity-70" src={`https://admin.urikabioworks.com/assets/${item.image}`} alt="Expertise Icon" />
-                <div class={`${index % 2 !== 0 ? 'md:text-right' : 'md:text-left'} text-center md:text-left text-urika-gray-500 text-2xl text-pretty`}>
+                <div class={`${index % 2 !== 0 ? 'md:text-right' : 'md:text-left'} text-center md:text-left text-urika-gray-600 text-2xl text-pretty`}>
                     <Fragment set:html={item.content} />
                 </div>
             </div>

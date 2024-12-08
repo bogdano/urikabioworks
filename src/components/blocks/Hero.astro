@@ -6,20 +6,20 @@ const { image, title, subtitle, tagline } = Astro.props;
         min-height: 100svh;
     }
     .logo-title {
-        font-size: clamp(5rem, 7vw, 8rem);
+        font-size: clamp(4rem, 7vw, 8rem);
         line-height: 0.85em;
     }
     .logo-subtitle {
-        font-size: clamp(2.2rem, 3.05vw, 3.5rem);
+        font-size: clamp(1.75rem, 3.05vw, 3.5rem);
         letter-spacing: 0.35em;
         line-height: 1.2em;
     }
     .logo-tagline {
-        font-size: clamp(1.25rem, 1.75vw, 2rem);
+        font-size: clamp(1rem, 1.75vw, 2rem);
         line-height: 2em;
     }
     .left-bracket, .right-bracket {
-        font-size: clamp(2.25rem, 3.25vw, 3.75rem);
+        font-size: clamp(1.85rem, 3.25vw, 3.75rem);
     }
     .left-bracket {
         line-height: 2rem;
@@ -42,8 +42,13 @@ const { image, title, subtitle, tagline } = Astro.props;
         </h1>
     </div>
     <button id="scrollDownButton" class="w-12 h-12 mb-8 cursor-pointer outline-none" aria-label="Scroll Down">
-        <svg class="h-10 w-10" viewBox="0 0 26.336874 14.60877" xmlns="http://www.w3.org/2000/svg">
-            <g transform="translate(-7.5397891,-119.59028)"><g><path style="fill:#27a9e0;stroke-width:0.264583" d="m 7.610878,121.15278 13.010734,13.01073 1.367736,-1.36774 -13.1026825,-13.10268 z" /><path style="fill:#f6931d;stroke-width:0.264583;fill-opacity:1" d="m 32.44291,119.60225 1.275391,1.45899 -11.146485,11.14648 -1.36914,-1.36718 z" /></g></g>
+        <svg class="h-12 w-12" viewBox="0 0 26.336874 14.60877" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(-7.5397891,-119.59028)"><g><path
+                     style="fill:#27a9e0;stroke-width:0.264583"
+                     d="m 7.610878,121.15278 13.010734,13.01073 1.367736,-1.36774 -13.1026825,-13.10268 z" />
+                  <path
+                     style="fill:#f6931d;fill-opacity:1;stroke-width:0.264583"
+                     d="M 32.442133 119.602 L 22.049555 129.99458 L 23.416742 131.36176 L 33.717523 121.06098 L 32.442133 119.602 z " /></g></g>
         </svg>
     </button>
 </div>

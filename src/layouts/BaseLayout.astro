@@ -54,8 +54,8 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
         inView(".fade-in", ({ target }) => {
             animate(target,
           		{ opacity: [0, 1]},
+                { delay: stagger(0.1) },
           		{ duration: 0.6, ease: 'easeOut' },
-                { delay: stagger(0.9) }
             );
         })
         inView(".fade-left", ({ target }) => {
