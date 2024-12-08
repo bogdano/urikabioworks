@@ -27,7 +27,6 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
-		<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
 		<noscript>
             <style>
                 .fade-up, .fade-up, .fade-left {
@@ -44,10 +43,10 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
         </article>
 	</body>
 	<script type="module" data-astro-rerun>
-   	    const { animate, inView, stagger } = Motion
+   	    import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
         inView(".fade-up", ({ target }) => {
           animate(target,
-        		{ opacity: [0, 1], y: [30, 0] },
+          		{ opacity: [0, 1], y: [30, 0] },
         		{ duration: 0.6},
                 { ease: [0.39, 0.24, 0.3, 1] },
           );
