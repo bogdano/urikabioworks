@@ -1,6 +1,6 @@
 ---
 import '../styles/urika.css'
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation.astro';
 const { title } = Astro.props
 const { description } = Astro.props
@@ -34,7 +34,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
                 }
             </style>
         </noscript>
-        <ViewTransitions />
+        <ClientRouter />
 	</head>
 	<body>
 	    <Navigation menu_items={menu_items} logo={global.logo} />
