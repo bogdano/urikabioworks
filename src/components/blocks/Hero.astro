@@ -2,9 +2,6 @@
 const { image, title, subtitle, tagline } = Astro.props;
 ---
 <style>
-    .hero-block {
-        min-height: 100svh;
-    }
     .logo-title {
         font-size: clamp(4rem, 7vw, 8rem);
         line-height: 0.85em;
@@ -30,7 +27,7 @@ const { image, title, subtitle, tagline } = Astro.props;
     }
 </style>
 
-<div class="hero-block min-h-dvh flex flex-col items-center">
+<div class="hero-block min-h-svh h-dvh flex flex-col items-centder">
     <div class="flex-grow flex flex-col items-center justify-center mb-8 fade-up">
         <img class="2xl:w-64 lg:w-56 w-48 transition mb-12 mt-16" src={`https://admin.urikabioworks.com/assets/${image}`} alt="Hero Image" loading="lazy" />
         <h1 class="text-center">
