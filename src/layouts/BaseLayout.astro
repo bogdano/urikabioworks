@@ -36,12 +36,12 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
         </noscript>
         <ClientRouter />
 	</head>
-	<body>
+	<body class="bg-white dark:bg-zinc-950 font-touche text-urika-gray-600 dark:text-urika-gray-300">
 	    <Navigation menu_items={menu_items} logo={global.logo} />
 	    <article class="max-w-6xl mx-auto xl:px-0 px-8 w-full">
             <slot />
         </article>
-	</body>
+	</body>c
 	<script type="module" data-astro-rerun>
    	    import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
         inView(".fade-up", ({ target }) => {

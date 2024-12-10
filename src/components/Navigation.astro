@@ -1,29 +1,29 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
 const { menu_items, logo } = Astro.props
 function normalizeUrl(url) {
     return url.replace(/\/$/, "");
 }
 const currentPath = normalizeUrl(Astro.url.pathname);
-
 ---
 
-<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 w-full  transition-shadow backdrop-blur border-b border-white">
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow md:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
     <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
         <span class="menu-btn__burger"></span>
     </button>
 
-    <a href="/" id="upper-logo" class="flex items-center mx-auto opacity-0 transition-opacity duration-500 md:pl-4">
+    <a href="/" id="upper-logo" class="flex items-center mx-auto opacity-0 transition-opacity duration-500 pr-12 md:p-0 md:ml-4 md:mr-4">
         <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-8" />
-        <span class="text-urika-gray-400 font-urika text-xl font-semibold ml-2">URIKA</span>
+        <span class="text-urika-gray-400 dark:text-urika-gray-300 font-urika text-xl font-semibold ml-2 mr-2">URIKA</span>
     </a>
 
-    <div class="nav-wrapper flex justify-center" id="nav-wrapper" transition:name="menu">
-        <div id="main-navigation">
-            <ul class="nav-buttons font-touche font-extrabold flex gap-4 text-urika-blue-900 text-md md:-ml-28">
+    <div id="nav-wrapper" class="bg-white dark:bg-zinc-950/20 md:bg-white/0 nav-wrapper flex backdrop-blur-lg md:backdrop-blur-none md:dark:border-none dark:border dark:border-zinc-700" transition:name="menu">
+        <div id="main-navigation" class="grow">
+            <ul class="nav-buttons font-extrabold flex gap-4 text-urika-blue-900 dark:text-urika-orange-400 text-md">
                 {menu_items.map((item) => (
-                    <li class="hover:bg-urika-orange-400 hover:text-white rounded-full transition">
+                    <li class="hover:bg-urika-orange-400 dark:hover:bg-urika-blue-600 hover:text-white rounded-full transition">
                         { normalizeUrl(item.permalink) === currentPath ? (
-                            <span class="block w-full px-4 py-2 bg-urika-blue-900 rounded-full cursor-default text-white uppercase">{item.title}</span>
+                            <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-600 rounded-full cursor-default text-white uppercase">{item.title}</span>
                         ) : (
                             <a class="block px-4 py-2 uppercase" href={item.permalink}>{item.title}</a>
                         )}
@@ -31,11 +31,11 @@ const currentPath = normalizeUrl(Astro.url.pathname);
                 ))}
             </ul>
         </div>
-        <div id="secondary-navigation" class="mobile-only flex justify-end">
-            <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-12" />
+        <div id="secondary-navigation" class="flex md:justify-end justify-between w-full md:w-32 md:pr-4">
+            <div class="flex pl-2 md:pl-0"><ThemeToggle /></div>
+            <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="mobile-only h-12" />
         </div>
     </div>
-    <div class="mobile-only pr-16 w-6 h-6 block"></div>
 
     <div class="overlay mobile-only" id="overlay"></div>
 </nav>
@@ -45,10 +45,10 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     const navigation = document.getElementById('navigation');
     const upperLogo = document.getElementById('upper-logo');
     if (window.scrollY > 0) {
-      navigation.classList.add('shadow-md');
+      navigation.classList.add('shadow');
       upperLogo.classList.add('opacity-100');
     } else {
-      navigation.classList.remove('shadow-md');
+      navigation.classList.remove('shadow');
       upperLogo.classList.remove('opacity-100');
     }
   });
@@ -62,6 +62,12 @@ const currentPath = normalizeUrl(Astro.url.pathname);
     const navWrapper = document.getElementById('nav-wrapper');
     const overlay = document.getElementById('overlay');
     let menuOpen = false;
+
+    // Get scrollbar width
+    const getScrollbarWidth = () => {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      return scrollbarWidth;
+    };
 
     const openMenu = () => {
       menuOpen = true;
@@ -78,13 +84,6 @@ const currentPath = normalizeUrl(Astro.url.pathname);
         overlay.classList.add('open');
       }, 10);
     };
-
-    // Get scrollbar width
-    const getScrollbarWidth = () => {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      return scrollbarWidth;
-    };
-
     const closeMenu = () => {
       menuOpen = false;
       const { documentElement: html } = document;
@@ -95,7 +94,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
       // set display: none with 300ms delay
       setTimeout(() => {
         overlay.style.setProperty('display', 'none');
-      }, 500);
+      }, 150);
     };
 
     // Toggle menu with button
