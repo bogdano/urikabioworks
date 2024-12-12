@@ -10,9 +10,10 @@ const team_members = await directus.request(readItems("team_members", {
   fields: ["name", "title", "bio", "headshot", "section"],
 }))
 
+const { title } = Astro.props
 ---
 
-<Header branded={true} title={"OUR TEAM"} />
+<Header branded={true} title={title} />
 <div class="stagger-container grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
     {team_members.map((member) => (
         <div class="stagger-in flex flex-col gap-8 mb-8 items-center">
