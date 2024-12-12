@@ -1,0 +1,47 @@
+---
+import Header from "./Header.astro"
+import directus from "../../../lib/directus"
+import { readItems } from '@directus/sdk';
+
+const team_members = await directus.request(readItems("team_members", {
+  filter: {
+    status: { _eq: "published" },
+  },
+  fields: ["name", "title", "bio", "headshot", "section"],
+}))
+
+---
+
+<Header branded={true} title={"OUR TEAM"} />
+<div class="stagger-container grid grid-cols-1 lg:grid-cols-2 gap-12 my-12">
+    {team_members.map((member) => (
+        <div class="stagger-in flex flex-col gap-8 mb-8 items-center">
+            <div class="flex flex-col items-center md:flex-row lg:self-end md:mr-4">
+                <div class="flex flex-col md:self-end text-center md:text-right pr-4 pb-4">
+                    <h2 class="text-3xl font-bold leading-8 mb-1">{member.name}</h2>
+                    <h3 class="text-2xl text-urika-orange-500 leading-6 font-extrabold">{member.title}</h3>
+                </div>
+                <div class="w-72 h-72 rounded-2xl md:self-start bg-zinc-100 dark:bg-zinc-800">
+                    { member.headshot && (
+                        <img src={`https://admin.urikabioworks.com/assets/${member.headshot}`} alt={member.name} loading="lazy" class="w-72 h-72 rounded-2xl object-cover" />
+                    )}
+                </div>
+            </div>
+            <div class="rounded-2xl md:p-4 md:px-6 md:border border-zinc-100 dark:border-zinc-800 h-full md:shadow">
+                <p class="text-lg md:indent-12">{member.bio}</p>
+            </div>
+        </div>
+    ))}
+</div>
+
+
+<script type="module" data-astro-rerun>
+    import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+    inView(".stagger-container", ({ target }) => {
+        animate(".stagger-in",
+         	{ opacity: [0, 1], x: [20, 0] },
+      		{ delay: stagger(0.3), duration: 0.6},
+            { ease: [0.39, 0.24, 0.3, 1] },
+        );
+    })
+</script>

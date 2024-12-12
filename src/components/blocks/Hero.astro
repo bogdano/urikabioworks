@@ -25,11 +25,16 @@ const { image, title, subtitle, tagline } = Astro.props;
     .right-bracket {
         line-height: 2rem;
     }
+
+    .hero-block {
+        min-height: calc(100dvh - 4rem);
+        height: calc(100dvh - 4rem);
+    }
 </style>
 
-<div class="hero-block min-h-svh h-dvh flex flex-col items-center">
+<div class="hero-block flex flex-col items-center">
     <div class="flex-grow flex flex-col items-center justify-center mb-8 fade-up">
-        <img style="height: 40dvh;" class="transition mb-12 mt-16" src={`https://admin.urikabioworks.com/assets/${image}`} alt="URIKA Logo" loading="lazy" />
+        <img style="height: 40dvh;" class="transition mb-12" src={`https://admin.urikabioworks.com/assets/${image}`} alt="URIKA Logo" loading="lazy" />
         <h1 class="text-center">
             <span class="font-urika text-urika-gray-400 logo-title mb-3 block">{title}</span>
             <span class="left-bracket font-touche text-urika-gray-400">[</span>

@@ -42,12 +42,21 @@
 ::-moz-selection { /* Code for Firefox */
   background: #fde2ab;
 }
-
 ::selection {
   background: #fde2ab;
 }
+@media (prefers-color-scheme: dark) {
+    ::-moz-selection { /* Code for Firefox */
+      background: #bf5a0f;
+      color: white;
+    }
+    ::selection {
+      background: #bf5a0f;
+      color: white;
+    }
+}
 
-.fade-in, .fade-up, .fade-left {
+.fade-in, .fade-up, .fade-left, .stagger-in {
     opacity: 0;
 }
 

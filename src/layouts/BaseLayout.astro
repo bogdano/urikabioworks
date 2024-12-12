@@ -2,6 +2,7 @@
 import '../styles/urika.css'
 import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
 const { title } = Astro.props
 const { description } = Astro.props
 import directus from "../../lib/directus"
@@ -38,9 +39,10 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 	</head>
 	<body class="bg-white dark:bg-zinc-950 font-touche text-urika-gray-600 dark:text-urika-gray-300">
 	    <Navigation menu_items={menu_items} logo={global.logo} />
-	    <article class="max-w-6xl mx-auto xl:px-0 px-8 w-full">
+	    <article class="max-w-6xl mx-auto xl:px-0 px-8 w-full mt-16">
             <slot />
         </article>
+        <Footer logo={global.logo} />
 	</body>
 	<script type="module" data-astro-rerun>
    	    import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
