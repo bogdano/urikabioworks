@@ -11,7 +11,7 @@ const global = await directus.request(readSingleton("global", { fields: ["logo"]
     })
 </script>
 
-<Header branded={true} title={"OUR MISSION"} />
+<!-- <Header branded={true} title={"OUR MISSION"} /> -->
 <div class="text-xl flex flex-col gap-4">
     <div id="content" class="font-touche flex flex-col gap-8 md:text-2xl text-lg md:text-justify text-balance md:mx-16 md:*:indent-12 *:text-pretty">
         <Fragment set:html={content} />
