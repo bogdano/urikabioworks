@@ -24,7 +24,7 @@ const { title } = Astro.props
                 </div>
                 <div class="w-72 h-72 rounded-2xl md:self-start bg-zinc-100 dark:bg-zinc-800">
                     { member.headshot && (
-                        <img src={`https://admin.urikabioworks.com/assets/${member.headshot}`} alt={member.name} loading="lazy" class="w-72 h-72 rounded-2xl object-cover" />
+                        <img src={`https://admin.urikabioworks.com/assets/${member.headshot}?width=500&format=webp`} alt={member.name} loading="lazy" class="w-72 h-72 rounded-2xl object-cover" />
                     )}
                 </div>
             </div>
