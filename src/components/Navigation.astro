@@ -41,70 +41,70 @@ const currentPath = normalizeUrl(Astro.url.pathname);
 </nav>
 
 <script>
-  document.addEventListener('scroll', () => {
-    const navigation = document.getElementById('navigation');
-    const upperLogo = document.getElementById('upper-logo');
-    if (window.scrollY > 0) {
-      navigation.classList.add('shadow');
-      upperLogo.classList.add('opacity-100');
-    } else {
-      navigation.classList.remove('shadow');
-      upperLogo.classList.remove('opacity-100');
+    document.addEventListener('scroll', () => {
+        const navigation = document.getElementById('navigation');
+        const upperLogo = document.getElementById('upper-logo');
+        if (window.scrollY > 0) {
+            navigation.classList.add('shadow');
+            upperLogo.classList.add('opacity-100');
+        } else {
+            navigation.classList.remove('shadow');
+            upperLogo.classList.remove('opacity-100');
+        }
+    });
+
+    document.addEventListener('astro:page-load', () => {
+        mountMenuListeners();
+    });
+
+    const mountMenuListeners = () => {
+        const menuButton = document.getElementById('menu-button');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const overlay = document.getElementById('overlay');
+        let menuOpen = false;
+
+        // Get scrollbar width
+        const getScrollbarWidth = () => {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            return scrollbarWidth;
+        };
+
+        const openMenu = () => {
+            menuOpen = true;
+            const { documentElement: html } = document;
+            const scrollbarWidth = getScrollbarWidth();
+            if (scrollbarWidth) {
+                html.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+            }
+            html.classList.add('menu-is-open');
+            menuButton.classList.add('open');
+            navWrapper.classList.add('open');
+            overlay.style.setProperty('display', 'block');
+            setTimeout(() => {
+                overlay.classList.add('open');
+            }, 10);
+        };
+        const closeMenu = () => {
+            menuOpen = false;
+            const { documentElement: html } = document;
+            html.classList.remove('menu-is-open');
+            menuButton.classList.remove('open');
+            navWrapper.classList.remove('open');
+            overlay.classList.remove('open');
+            // set display: none with 300ms delay
+            setTimeout(() => {
+                overlay.style.setProperty('display', 'none');
+            }, 150);
+        };
+
+        // Toggle menu with button
+        menuButton.addEventListener('click', () => {
+            menuOpen ? closeMenu() : openMenu();
+        });
+
+        // Close menu when clicking outside
+        overlay.addEventListener('click', () => {
+            closeMenu();
+        });
     }
-  });
-
-  document.addEventListener('astro:page-load', () => {
-      mountMenuListeners();
-  });
-
-  const mountMenuListeners = () => {
-    const menuButton = document.getElementById('menu-button');
-    const navWrapper = document.getElementById('nav-wrapper');
-    const overlay = document.getElementById('overlay');
-    let menuOpen = false;
-
-    // Get scrollbar width
-    const getScrollbarWidth = () => {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      return scrollbarWidth;
-    };
-
-    const openMenu = () => {
-      menuOpen = true;
-      const { documentElement: html } = document;
-      const scrollbarWidth = getScrollbarWidth();
-      if (scrollbarWidth) {
-        html.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-      }
-      html.classList.add('menu-is-open');
-      menuButton.classList.add('open');
-      navWrapper.classList.add('open');
-      overlay.style.setProperty('display', 'block');
-      setTimeout(() => {
-        overlay.classList.add('open');
-      }, 10);
-    };
-    const closeMenu = () => {
-      menuOpen = false;
-      const { documentElement: html } = document;
-      html.classList.remove('menu-is-open');
-      menuButton.classList.remove('open');
-      navWrapper.classList.remove('open');
-      overlay.classList.remove('open');
-      // set display: none with 300ms delay
-      setTimeout(() => {
-        overlay.style.setProperty('display', 'none');
-      }, 150);
-    };
-
-    // Toggle menu with button
-    menuButton.addEventListener('click', () => {
-      menuOpen ? closeMenu() : openMenu();
-    });
-
-    // Close menu when clicking outside
-    overlay.addEventListener('click', () => {
-      closeMenu();
-    });
-  }
 </script>
