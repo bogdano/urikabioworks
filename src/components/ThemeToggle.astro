@@ -44,10 +44,11 @@
     };
     // toggle darkmode on "d" keydown
     document.addEventListener("keydown", (e) => {
-        if (e.key === "d") {
+        if (e.key === "d" && !isTextInput(document.activeElement)) {
             handleToggleClick();
         }
     });
+    const isTextInput = (element) => element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.isContentEditable;
 </script>
 
 <script is:inline data-astro-rerun>

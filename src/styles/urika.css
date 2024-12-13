@@ -60,6 +60,10 @@
     opacity: 0;
 }
 
+article {
+    min-height: calc(100vh - 12rem);
+}
+
 .menu-btn {
 	position: relative;
 	display: flex;
