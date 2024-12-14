@@ -8,16 +8,16 @@ const { branded, title } = Astro.props
 <div class="text-center mt-24 mb-12">
     { branded ? (
         <div class="flex mx-auto justify-center flex-row align-middle md:-ml-8 -ml-4 text-urika-gray-400 dark:text-urika-gray-300">
-            <img src={`https://admin.urikabioworks.com/assets/${global.logo}`} alt="URIKA Logo" class="w-16 md:w-24 mr-2" />
+            <img src={`https://admin.urikabioworks.com/assets/${global.logo}`} alt="URIKA Logo" class="w-12 md:w-24 mr-2" />
             <h1 class="md:text-center self-center">
                 <p>
-                    <span class="font-urika text-6xl">URIKA </span>
+                    <span class="font-urika text-5xl md:text-6xl">URIKA </span>
                     <span class="desktop-only font-touche text-5xl tracking-widest">[bioworks]</span>
                 </p>
             </h1>
         </div>
-        <h2 class="fade-in font-touche text-urika-blue-800 dark:text-urika-blue-600 font-extrabold text-5xl mt-2 md:-mt-6">{ title }</h2>
+        <h2 class="fade-in font-touche text-urika-blue-800 dark:text-urika-blue-600 font-extrabold text-4xl md:text-5xl md:-mt-6">{ title }</h2>
     ) : (
-        <h1 class="fade-in font-touche text-urika-blue-800 dark:text-urika-blue-600 font-extrabold text-5xl">{ title }</h1>
+        <h1 class="fade-in font-touche text-urika-blue-800 dark:text-urika-blue-600 font-extrabold text-4xl md:text-5xl">{ title }</h1>
     )}
 </div>

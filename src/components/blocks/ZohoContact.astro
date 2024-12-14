@@ -27,8 +27,8 @@ import Head from '../Head.astro'
 
         <textarea class='textinput h-40 stagger-in' required aria-multiline='true' placeholder="Inquiry*" id='Description' aria-required='true' aria-label='Description' name='Description'></textarea>
 
-        <div class="self-center mx-auto w-80 h-20 mb-4 stagger-in">
-            <div class='g-recaptcha' data-sitekey='6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3' data-theme='light' data-callback='rccallback5824731000001554023' captcha-verified='false' id='recap5824731000001554023'></div>
+        <div class="self-center mx-auto w-min h-min mb-4 stagger-in">
+            <div id='recap5824731000001554023'></div>
             <div id='recapErr5824731000001554023' class="text-center" style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. Please try again.</div>
         </div>
 
@@ -41,9 +41,20 @@ import Head from '../Head.astro'
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
            	{ opacity: [0, 1] },
-      		{ delay: stagger(0.2), duration: 0.5},
+      		{ delay: stagger(0.1), duration: 0.5},
             { ease: [0.39, 0.24, 0.3, 1] },
         );
+    })
+
+    document.addEventListener('astro:page-load', () => {
+        const rcElement = document.getElementById('recap5824731000001554023');
+        if (rcElement) {
+            grecaptcha.render(rcElement, {
+                'sitekey': '6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3',
+                'callback': rccallback5824731000001554023,
+                'theme': 'dark',
+            });
+        }
     })
 
     function rccallback5824731000001554023() {
@@ -77,6 +88,7 @@ import Head from '../Head.astro'
         return true;
     }
 
+
     document.querySelector("#webform5824731000001554023").addEventListener("submit", async (event) => {
         event.preventDefault();
         const isRecaptchaValid = await checkReCaptcha();
@@ -90,7 +102,6 @@ import Head from '../Head.astro'
     });
 
     function checkReCaptcha() {
-        const recaptcha = document.getElementById("recap5824731000001554023");
         if(!validateEmail()){return false;}
         const token = grecaptcha.getResponse();
         if (!token) {
