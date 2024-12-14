@@ -1,10 +1,9 @@
 ---
 import '../styles/urika.css'
-import { ClientRouter } from 'astro:transitions';
+import Head from '../components/Head.astro';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
-const { title } = Astro.props
-const { description } = Astro.props
+const { title, description } = Astro.props
 import directus from "../../lib/directus"
 import {  readSingleton } from '@directus/sdk';
 const global = await directus.request(readSingleton("global", {
@@ -21,23 +20,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 ---
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>{title}</title>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href={"https://admin.urikabioworks.com/assets/" + global.logo} />
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-		<script src='https://www.google.com/recaptcha/api.js' async defer></script>
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<noscript>
-            <style>
-                .fade-up, .fade-up, .fade-left {
-                    opacity: 1;
-                }
-            </style>
-        </noscript>
-        <ClientRouter />
-	</head>
+	<Head />
 	<body class="bg-white dark:bg-zinc-950 font-touche text-urika-gray-600 dark:text-urika-gray-300">
 	    <Navigation menu_items={menu_items} logo={global.logo} />
 	    <article class="max-w-6xl mx-auto xl:px-0 px-8 w-full mt-16">

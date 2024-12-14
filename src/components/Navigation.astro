@@ -17,13 +17,13 @@ const currentPath = normalizeUrl(Astro.url.pathname);
         <span class="text-urika-gray-400 dark:text-urika-gray-300 font-urika text-xl font-semibold ml-2 mr-2">URIKA</span>
     </a>
 
-    <div id="nav-wrapper" class="bg-white dark:bg-zinc-950/20 md:bg-white/0 nav-wrapper flex backdrop-blur-lg md:backdrop-blur-none md:dark:border-none dark:border dark:border-zinc-700" transition:name="menu">
+    <div id="nav-wrapper" class="bg-white dark:bg-zinc-950/20 md:bg-white/0 nav-wrapper flex backdrop-blur-lg md:backdrop-blur-none md:dark:border-none dark:border-r dark:border-zinc-800" transition:name="menu">
         <div id="main-navigation" class="grow">
             <ul class="nav-buttons font-extrabold flex gap-4 text-urika-blue-900 dark:text-urika-gray-300 text-md">
                 {menu_items.map((item) => (
                     <li class="hover:bg-urika-orange-400 dark:hover:bg-urika-blue-600 hover:text-white rounded-full transition">
                         { normalizeUrl(item.permalink) === currentPath ? (
-                            <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-600 rounded-full cursor-default text-white uppercase">{item.title}</span>
+                            <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-700 rounded-full cursor-default text-white uppercase">{item.title}</span>
                         ) : (
                             <a class="block px-4 py-2 uppercase" href={item.permalink}>{item.title}</a>
                         )}

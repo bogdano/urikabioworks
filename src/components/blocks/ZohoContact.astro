@@ -1,295 +1,104 @@
-<style>
-    #crmWebToEntityForm.zcwf_lblLeft {
-   	width:100%;
-   	padding: 25px;
-   	margin: 0 auto;
-   	box-sizing: border-box;
-    }
-    #crmWebToEntityForm.zcwf_lblLeft * {
-   	box-sizing: border-box;
-    }
-    #crmWebToEntityForm{text-align: left;}
-    #crmWebToEntityForm * {
-   	direction: ltr;
-    }
-    .zcwf_lblLeft .zcwf_title {
-   	word-wrap: break-word;
-   	padding: 0px 6px 10px;
-   	font-weight:bold }.zcwf_lblLeft.cpT_primaryBtn:hover{
-   	background: linear-gradient(#02acff 0,#006be4 100%) no-repeat padding-box !important;
-   	box-shadow: 0 -2px 0 0 #0159b9 inset !important;
-   	border: 0 !important;
-   	color: #fff !important;
-   	outline: 0 !important;
-    }.zcwf_lblLeft .zcwf_col_fld input[type=text], input[type=password], .zcwf_lblLeft .zcwf_col_fld textarea {
-   	width: 60%;
-   	border: 1px solid #c0c6cc !important;
-   	resize: vertical;
-   	border-radius: 2px;
-   	float: left;
-    }
-    .zcwf_lblLeft .zcwf_col_lab {
-   	width: 30%;
-   	word-break: break-word;
-   	padding: 0px 6px 0px;
-   	margin-right: 10px;
-   	margin-top: 5px;
-   	float: left;
-   	min-height: 1px;
-    }
-    .zcwf_lblLeft .zcwf_col_fld {
-   	float: left;
-   	width: 68%;
-   	padding: 0px 6px 0px;
-   	position: relative;
-   	margin-top: 5px;
-    }
-    .zcwf_lblLeft .zcwf_privacy{padding: 6px;}
-    .zcwf_lblLeft .wfrm_fld_dpNn{display: none;}
-    .dIB{display: inline-block;}
-    .zcwf_lblLeft .zcwf_col_fld_slt {
-   	width: 60%;
-   	border: 1px solid #ccc;
-   	background: #fff;
-   	border-radius: 4px;
-   	font-size: 12px;
-   	float: left;
-   	resize: vertical;
-   	padding: 2px 5px;
-    }
-    .zcwf_lblLeft .zcwf_row:after, .zcwf_lblLeft .zcwf_col_fld:after {
-   	content: '';
-   	display: table;
-   	clear: both;
-    }
-    .zcwf_lblLeft .zcwf_col_help {
-   	float: left;
-   	margin-left: 7px;
-   	font-size: 12px;
-   	max-width: 35%;
-   	word-break: break-word;
-    }
-    .zcwf_lblLeft .zcwf_help_icon {
-   	cursor: pointer;
-   	width: 16px;
-   	height: 16px;
-   	display: inline-block;
-   	background: #fff;
-   	border: 1px solid #c0c6cc;
-   	color: #c1c1c1;
-   	text-align: center;
-   	font-size: 11px;
-   	line-height: 16px;
-   	font-weight: bold;
-   	border-radius: 50%;
-    }
-    .zcwf_lblLeft .zcwf_row {margin: 15px 0px;}
-    .zcwf_lblLeft .formsubmit {
-   	margin-right: 5px;
-   	cursor: pointer;
-   	color: var(--baseColor);
-   	font-size: 12px;
-    }
-    .zcwf_lblLeft .zcwf_privacy_txt {
-   	width: 90%;
-   	color: rgb(0, 0, 0);
-   	font-size: 12px;
-   	font-family: Arial;
-   	display: inline-block;
-   	vertical-align: top;
-   	color: var(--baseColor);
-   	padding-top: 2px;
-   	margin-left: 6px;
-    }
-    .zcwf_lblLeft .zcwf_button {
-   	font-size: 12px;
-   	color: var(--baseColor);
-   	border: 1px solid #c0c6cc;
-   	padding: 3px 9px;
-   	border-radius: 4px;
-   	cursor: pointer;
-   	max-width: 120px;
-   	overflow: hidden;
-   	text-overflow: ellipsis;
-   	white-space: nowrap;
-    }
-    .zcwf_lblLeft .zcwf_tooltip_over{
-   	position: relative;
-    }
-    .zcwf_lblLeft .zcwf_tooltip_ctn{
-   	position: absolute;
-   	background: #dedede;
-   	padding: 3px 6px;
-   	top: 3px;
-   	border-radius: 4px;word-break: break-word;
-   	min-width: 100px;
-   	max-width: 150px;
-   	color: var(--baseColor);
-   	z-index: 100;
-    }
-    .zcwf_lblLeft .zcwf_ckbox{
-   	float: left;
-    }
-    .zcwf_lblLeft .zcwf_file{
-   	width: 55%;
-   	box-sizing: border-box;
-   	float: left;
-    }
-    .cBoth:after{
-   	content:'';
-   	display: block;
-   	clear: both;
-    }
-    @media all and (max-width: 600px) {
-   	.zcwf_lblLeft .zcwf_col_lab, .zcwf_lblLeft .zcwf_col_fld {
-  		width: auto;
-  		float: none !important;
-   	}
-   	.zcwf_lblLeft .zcwf_col_help {width: 40%;}
-    }
-</style>
+---
+import Head from '../Head.astro'
+---
+<Head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</Head>
 
-<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm' style='background-color: white;color: black;max-width: 600px;'>
+<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
     <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' onsubmit='javascript:document.charset="UTF-8"; return checkMandatory5824731000001554023()' accept-charset='UTF-8'>
-        <input type='text' style='display:none;' name='xnQsjsdp' value='43a3a854b48341c9612db7021e05239a92117fb07e894da7eac11bfd2ff72331'></input>
+        <input type='text' style='display:none;' name='xnQsjsdp' value='bf642f09879d8e7f146626c9fb3b3728f9a01ff86cefb1fb1da85e0272e6b936'></input>
         <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
-        <input type='text' style='display:none;' name='xmIwtLD' value='5acbf2d916a8cef0ac5dcd0ab4a68fbf1d2a0cfb45be10bc05b5cf708b56365f9a1bc584bd1ce9fcb8c0c517ba91a0aa'></input>
+        <input type='text' style='display:none;' name='xmIwtLD' value='36b762507263c2ebe4e67d7180dcc7647d39fa6aa6060229adf03cdc44568de16e4d830ab8f7281bf648b7b548b27d08'></input>
         <input type='text'  style='display:none;' name='actionType' value='TGVhZHM='></input>
         <input type='text' style='display:none;' name='returnURL' value='https&#x3a;&#x2f;&#x2f;urikabioworks.com&#x2f;thank-you' > </input>
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='First_Name'>First Name<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='First_Name' aria-required='true' aria-label='First Name' name='First Name' aria-valuemax='40' maxlength='40'></input>
-                <div class='zcwf_col_help'></div>
-            </div>
+        <div class="flex flex-col md:flex-row md:gap-4 stagger-in">
+            <input type='text' required autofocus class='textinput' placeholder="First Name*" id='First_Name' aria-required='true' aria-label='First Name' name='First Name' aria-valuemax='40' maxlength='40'></input>
+            <input type='text' required class='textinput' placeholder="Last Name*" id='Last_Name' aria-required='true' aria-label='Last Name' name='Last Name' aria-valuemax='80' maxlength='80'></input>
         </div>
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='Last_Name'>Last Name<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='Last_Name' aria-required='true' aria-label='Last Name' name='Last Name' aria-valuemax='80' maxlength='80'></input>
-                <div class='zcwf_col_help'></div>
-            </div>
+        <input type='email' required class='textinput stagger-in' placeholder="your@address.com*" id='Email' aria-required='true' aria-label='Email' name='Email' aria-valuemax='100' maxlength='100'></input>
+
+        <div class="flex flex-col md:flex-row md:gap-4 stagger-in">
+            <input type='text' required class='textinput' placeholder="Company*" id='Company' aria-required='true' aria-label='Company' name='Company' aria-valuemax='200' maxlength='200'></input>
+            <input type='text' required class='textinput' placeholder="Title*" id='Designation' aria-required='true' aria-label='Designation' name='Designation' aria-valuemax='100' maxlength='100'></input>
         </div>
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='Email'>Email<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' type='email' autocomplete='false' id='Email' aria-required='true' aria-label='Email' name='Email' aria-valuemax='100' maxlength='100'></input>
-                <div class='zcwf_col_help'></div>
-            </div>
+        <textarea class='textinput h-40 stagger-in' required aria-multiline='true' placeholder="Inquiry*" id='Description' aria-required='true' aria-label='Description' name='Description'></textarea>
+
+        <div class="self-center mx-auto w-80 h-20 mb-4 stagger-in">
+            <div class='g-recaptcha' data-sitekey='6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3' data-theme='light' data-callback='rccallback5824731000001554023' captcha-verified='false' id='recap5824731000001554023'></div>
+            <div id='recapErr5824731000001554023' style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. If you are not a robot then please try again.</div>
         </div>
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='Designation'>Title<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='Designation' aria-required='true' aria-label='Designation' name='Designation' aria-valuemax='100' maxlength='100'></input>
-                <div class='zcwf_col_help'></div>
-            </div>
-        </div>
+        <input type='submit' class='button stagger-in' id='formsubmit' role='button' class='formsubmit zcwf_button' value='Submit' aria-label='Submit' title='Submit'>
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='Company'>Company<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='Company' aria-required='true' aria-label='Company' name='Company' aria-valuemax='200' maxlength='200'></input>
-                <div class='zcwf_col_help'></div>
-            </div>
-        </div>
+        <script type="module" data-astro-rerun>
+            import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+            inView(".stagger-container", ({ target }) => {
+                animate(".stagger-in",
+                 	{ opacity: [0, 1] },
+              		{ delay: stagger(0.2), duration: 0.5},
+                    { ease: [0.39, 0.24, 0.3, 1] },
+                );
+            })
 
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='Description'>Inquiry<span style='color:red;'>*</span></label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <textarea aria-multiline='true' id='Description' aria-required='true' aria-label='Description' name='Description'></textarea>
-                <div class='zcwf_col_help'></div>
-            </div>
-        </div>
-
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab'></div>
-            <div class='zcwf_col_fld'>
-                <div class='g-recaptcha' data-sitekey='6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3' data-theme='light' data-callback='rccallback5824731000001554023' captcha-verified='false' id='recap5824731000001554023'></div>
-                <div  id='recapErr5824731000001554023' style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. If you are not a robot then please try again.</div>
-            </div>
-        </div>
-
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab'></div>
-            <div class='zcwf_col_fld'>
-                <input type='submit' id='formsubmit' role='button' class='formsubmit zcwf_button' value='Submit' aria-label='Submit' title='Submit'>
-                <input type='reset' class='zcwf_button' role='button' name='reset' value='Reset' aria-label='Reset' title='Reset'>
-            </div>
-        </div>
-
-
-<script>
-    function rccallback5824731000001554023() {
-        if(document.getElementById('recap5824731000001554023')!=undefined){
-            document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
-        }
-        if(document.getElementById('recapErr5824731000001554023')!=undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
-            document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
-        }
-    }
-
-    function reCaptchaAlert5824731000001554023() {
-        var recap = document.getElementById('recap5824731000001554023');
-        if( recap !=undefined && recap.getAttribute('captcha-verified') == 'false') {
-            document.getElementById('recapErr5824731000001554023').style.visibility='visible';
-            return false;
-        }
-        return true;
-    }
-
-    function validateEmail5824731000001554023() {
-        const form = document.forms['WebToLeads5824731000001554023'];
-        const emailFld = form.querySelectorAll('[type=email]');
-        let i = 0;
-        for (i = 0; i < emailFld.length; i++) {
-            var emailVal = emailFld[i].value;
-            if((emailVal.replace(/^\s+|\s+$/g, '')).length!=0 ) {
-       			var atpos=emailVal.indexOf('@');
-       			var dotpos=emailVal.lastIndexOf('.');
-       			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailVal.length)	{
-         			alert('Please enter a valid email address. ');
-         			emailFld[i].focus();
-         			return false;
-           	    }
+            function rccallback5824731000001554023() {
+                if(document.getElementById('recap5824731000001554023')!=undefined){
+                    document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
+                }
+                if(document.getElementById('recapErr5824731000001554023')!=undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
+                    document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
+                }
             }
-        }
-        return true;
-    }
 
-    function checkMandatory5824731000001554023() {
-        if(!validateEmail5824731000001554023()){return false;}
+            function reCaptchaAlert5824731000001554023() {
+                var recap = document.getElementById('recap5824731000001554023');
+                if( recap !=undefined && recap.getAttribute('captcha-verified') == 'false') {
+                    document.getElementById('recapErr5824731000001554023').style.visibility='visible';
+                    return false;
+                }
+                return true;
+            }
 
-        if(!reCaptchaAlert5824731000001554023()){return false;}
+            function validateEmail5824731000001554023() {
+                const form = document.forms['WebToLeads5824731000001554023'];
+                const emailFld = form.querySelectorAll('[type=email]');
+                let i = 0;
+                for (i = 0; i < emailFld.length; i++) {
+                    var emailVal = emailFld[i].value;
+                    if((emailVal.replace(/^\s+|\s+$/g, '')).length!=0 ) {
+             			var atpos=emailVal.indexOf('@');
+             			var dotpos=emailVal.lastIndexOf('.');
+             			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailVal.length)	{
+                 			alert('Please enter a valid email address. ');
+                 			emailFld[i].focus();
+                 			return false;
+                   	    }
+                    }
+                }
+                return true;
+            }
 
-        var urlparams = new URLSearchParams( window.location.search);
+            function checkMandatory5824731000001554023() {
+                if(!validateEmail5824731000001554023()){return false;}
 
-        if (urlparams.has('service') && (urlparams.get('service')==='smarturl')) {
-            var webform = document.getElementById('webform5824731000001554023');
-            var service =  urlparams.get('service');
-            var smarturlfield = document.createElement('input');
-            smarturlfield.setAttribute('type','hidden');
-            smarturlfield.setAttribute('value',service);
-            smarturlfield.setAttribute('name','service');
-            webform.appendChild(smarturlfield);
-        }
-        document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', 'true');
-    }
-</script>
-</form>
+                if(!reCaptchaAlert5824731000001554023()){return false;}
+
+                var urlparams = new URLSearchParams( window.location.search);
+
+                if (urlparams.has('service') && (urlparams.get('service')==='smarturl')) {
+                    var webform = document.getElementById('webform5824731000001554023');
+                    var service =  urlparams.get('service');
+                    var smarturlfield = document.createElement('input');
+                    smarturlfield.setAttribute('type','hidden');
+                    smarturlfield.setAttribute('value',service);
+                    smarturlfield.setAttribute('name','service');
+                    webform.appendChild(smarturlfield);
+                }
+                document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', 'true');
+            }
+        </script>
+    </form>
 </div>

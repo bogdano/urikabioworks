@@ -1,0 +1,22 @@
+---
+import { ClientRouter } from 'astro:transitions';
+const { title, description } = Astro.props
+---
+
+<head>
+	<title>{title}</title>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/svg+xml" href={"https://admin.urikabioworks.com/assets/" + global.logo} />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+	<meta name="generator" content={Astro.generator} />
+	<meta name="description" content={description} />
+	<slot />
+	<noscript>
+        <style>
+            .fade-up, .fade-up, .fade-left {
+                opacity: 1;
+            }
+        </style>
+    </noscript>
+    <ClientRouter />
+</head>
