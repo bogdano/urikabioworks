@@ -6,7 +6,7 @@ import Head from '../Head.astro'
 </Head>
 
 <div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
-    <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' onsubmit='javascript:document.charset="UTF-8"; return checkMandatory5824731000001554023()' accept-charset='UTF-8'>
+    <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' accept-charset='UTF-8'>
         <input type='text' style='display:none;' name='xnQsjsdp' value='bf642f09879d8e7f146626c9fb3b3728f9a01ff86cefb1fb1da85e0272e6b936'></input>
         <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
         <input type='text' style='display:none;' name='xmIwtLD' value='36b762507263c2ebe4e67d7180dcc7647d39fa6aa6060229adf03cdc44568de16e4d830ab8f7281bf648b7b548b27d08'></input>
@@ -29,76 +29,102 @@ import Head from '../Head.astro'
 
         <div class="self-center mx-auto w-80 h-20 mb-4 stagger-in">
             <div class='g-recaptcha' data-sitekey='6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3' data-theme='light' data-callback='rccallback5824731000001554023' captcha-verified='false' id='recap5824731000001554023'></div>
-            <div id='recapErr5824731000001554023' style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. If you are not a robot then please try again.</div>
+            <div id='recapErr5824731000001554023' class="text-center" style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. Please try again.</div>
         </div>
 
         <input type='submit' class='button stagger-in' id='formsubmit' role='button' class='formsubmit zcwf_button' value='Submit' aria-label='Submit' title='Submit'>
 
-        <script type="module" data-astro-rerun>
-            import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
-            inView(".stagger-container", ({ target }) => {
-                animate(".stagger-in",
-                 	{ opacity: [0, 1] },
-              		{ delay: stagger(0.2), duration: 0.5},
-                    { ease: [0.39, 0.24, 0.3, 1] },
-                );
-            })
-
-            function rccallback5824731000001554023() {
-                if(document.getElementById('recap5824731000001554023')!=undefined){
-                    document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
-                }
-                if(document.getElementById('recapErr5824731000001554023')!=undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
-                    document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
-                }
-            }
-
-            function reCaptchaAlert5824731000001554023() {
-                var recap = document.getElementById('recap5824731000001554023');
-                if( recap !=undefined && recap.getAttribute('captcha-verified') == 'false') {
-                    document.getElementById('recapErr5824731000001554023').style.visibility='visible';
-                    return false;
-                }
-                return true;
-            }
-
-            function validateEmail5824731000001554023() {
-                const form = document.forms['WebToLeads5824731000001554023'];
-                const emailFld = form.querySelectorAll('[type=email]');
-                let i = 0;
-                for (i = 0; i < emailFld.length; i++) {
-                    var emailVal = emailFld[i].value;
-                    if((emailVal.replace(/^\s+|\s+$/g, '')).length!=0 ) {
-             			var atpos=emailVal.indexOf('@');
-             			var dotpos=emailVal.lastIndexOf('.');
-             			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailVal.length)	{
-                 			alert('Please enter a valid email address. ');
-                 			emailFld[i].focus();
-                 			return false;
-                   	    }
-                    }
-                }
-                return true;
-            }
-
-            function checkMandatory5824731000001554023() {
-                if(!validateEmail5824731000001554023()){return false;}
-
-                if(!reCaptchaAlert5824731000001554023()){return false;}
-
-                var urlparams = new URLSearchParams( window.location.search);
-
-                if (urlparams.has('service') && (urlparams.get('service')==='smarturl')) {
-                    var webform = document.getElementById('webform5824731000001554023');
-                    var service =  urlparams.get('service');
-                    var smarturlfield = document.createElement('input');
-                    smarturlfield.setAttribute('type','hidden');
-                    smarturlfield.setAttribute('value',service);
-                    smarturlfield.setAttribute('name','service');
-                    webform.appendChild(smarturlfield);
-                }
-                document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', 'true');
-            }
-        </script>
     </form>
 </div>
+
+<script type="module" data-astro-rerun>
+    import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+    inView(".stagger-container", ({ target }) => {
+        animate(".stagger-in",
+           	{ opacity: [0, 1] },
+      		{ delay: stagger(0.2), duration: 0.5},
+            { ease: [0.39, 0.24, 0.3, 1] },
+        );
+    })
+
+    function rccallback5824731000001554023() {
+      console.log("running recaptcha callback")
+        if(document.getElementById('recap5824731000001554023') != undefined){
+            document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
+        }
+        if(document.getElementById('recapErr5824731000001554023')!=undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
+            document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
+        }
+    }
+
+    function reCaptchaAlert5824731000001554023() {
+        var recap = document.getElementById('recap5824731000001554023');
+        if( recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
+            document.getElementById('recapErr5824731000001554023').style.visibility='visible';
+            return false;
+        }
+        console.log('reCaptchaAlert5824731000001554023 passed');
+        return true;
+    }
+
+    function validateEmail() {
+        const form = document.forms['WebToLeads5824731000001554023'];
+        const emailFld = form.querySelectorAll('[type=email]');
+        let i = 0;
+        for (i = 0; i < emailFld.length; i++) {
+            var emailVal = emailFld[i].value;
+            if((emailVal.replace(/^\s+|\s+$/g, '')).length!=0 ) {
+     			var atpos=emailVal.indexOf('@');
+     			var dotpos=emailVal.lastIndexOf('.');
+     			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailVal.length)	{
+         			alert('Please enter a valid email address. ');
+         			emailFld[i].focus();
+         			return false;
+           	    }
+            }
+        }
+        return true;
+    }
+
+    document.querySelector("#webform5824731000001554023").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const isRecaptchaValid = await checkReCaptcha();
+        if (!isRecaptchaValid) {
+            console.error("reCAPTCHA validation failed!");
+            document.getElementById('recapErr5824731000001554023').style.visibility='visible';
+            return; // Stop the form submission
+        }
+        console.log("reCAPTCHA passed! Submitting form...");
+        event.target.submit();
+    });
+
+    function checkReCaptcha() {
+        const recaptcha = document.getElementById("recap5824731000001554023");
+        if(!validateEmail()){return false;}
+        const token = grecaptcha.getResponse();
+        if (!token) {
+          alert("Please complete the reCAPTCHA challenge.");
+          return false;
+        }
+    }
+
+    // function checkMandatory5824731000001554023() {
+    //     if(!validateEmail5824731000001554023()){return false;}
+    //     if(!reCaptchaAlert5824731000001554023()){console.log("FAIL"); return false;}
+
+        // var urlparams = new URLSearchParams( window.location.search);
+
+        // if (urlparams.has('service') && (urlparams.get('service')==='smarturl')) {
+        //     var webform = document.getElementById('webform5824731000001554023');
+        //     var service =  urlparams.get('service');
+        //     var smarturlfield = document.createElement('input');
+        //     smarturlfield.setAttribute('type','hidden');
+        //     smarturlfield.setAttribute('value',service);
+        //     smarturlfield.setAttribute('name','service');
+        //     webform.appendChild(smarturlfield);
+        // }
+    //     document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', 'true');
+    // }
+
+    // window.checkMandatory5824731000001554023 = checkMandatory5824731000001554023;
+</script>
