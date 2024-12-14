@@ -47,15 +47,16 @@ import Head from '../Head.astro'
     })
 
     function rccallback5824731000001554023() {
-      console.log("running recaptcha callback")
-        if(document.getElementById('recap5824731000001554023') != undefined){
-            document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
+        const recaptchaElement = document.getElementById('recap5824731000001554023');
+        const errorElement = document.getElementById('recapErr5824731000001554023');
+        if (recaptchaElement) {
+            recaptchaElement.setAttribute('captcha-verified', 'true');
         }
-        if(document.getElementById('recapErr5824731000001554023') != undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
-            document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
+        if (errorElement && errorElement.style.visibility === 'visible') {
+            errorElement.style.visibility = 'hidden';
         }
     }
-    window.rcccallback5824731000001554023 = rccallback5824731000001554023;
+    window.rccallback5824731000001554023 = rccallback5824731000001554023;
 
     function validateEmail() {
         const form = document.forms['WebToLeads5824731000001554023'];
