@@ -5,7 +5,7 @@ const global = await directus.request(readSingleton("global", { fields: ["logo"]
 const { branded, title } = Astro.props
 ---
 
-<div class="text-center mt-24 mb-12">
+<div class="text-center mb-12">
     { branded ? (
         <div class="flex mx-auto justify-center flex-row align-middle md:-ml-8 -ml-4 text-urika-gray-400 dark:text-urika-gray-300">
             <img src={`https://admin.urikabioworks.com/assets/${global.logo}`} alt="URIKA Logo" class="w-12 md:w-24 mr-2" />
