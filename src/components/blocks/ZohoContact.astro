@@ -33,7 +33,6 @@ import Head from '../Head.astro'
         </div>
 
         <input type='submit' class='button stagger-in' id='formsubmit' role='button' class='formsubmit zcwf_button' value='Submit' aria-label='Submit' title='Submit'>
-
     </form>
 </div>
 
@@ -52,20 +51,11 @@ import Head from '../Head.astro'
         if(document.getElementById('recap5824731000001554023') != undefined){
             document.getElementById('recap5824731000001554023').setAttribute('captcha-verified', 'true');
         }
-        if(document.getElementById('recapErr5824731000001554023')!=undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
+        if(document.getElementById('recapErr5824731000001554023') != undefined && document.getElementById('recapErr5824731000001554023').style.visibility == 'visible' ){
             document.getElementById('recapErr5824731000001554023').style.visibility='hidden';
         }
     }
-
-    function reCaptchaAlert5824731000001554023() {
-        var recap = document.getElementById('recap5824731000001554023');
-        if( recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
-            document.getElementById('recapErr5824731000001554023').style.visibility='visible';
-            return false;
-        }
-        console.log('reCaptchaAlert5824731000001554023 passed');
-        return true;
-    }
+    window.rcccallback5824731000001554023 = rccallback5824731000001554023;
 
     function validateEmail() {
         const form = document.forms['WebToLeads5824731000001554023'];
@@ -108,24 +98,4 @@ import Head from '../Head.astro'
         }
         return true;
     }
-
-    // function checkMandatory5824731000001554023() {
-    //     if(!validateEmail5824731000001554023()){return false;}
-    //     if(!reCaptchaAlert5824731000001554023()){console.log("FAIL"); return false;}
-
-        // var urlparams = new URLSearchParams( window.location.search);
-
-        // if (urlparams.has('service') && (urlparams.get('service')==='smarturl')) {
-        //     var webform = document.getElementById('webform5824731000001554023');
-        //     var service =  urlparams.get('service');
-        //     var smarturlfield = document.createElement('input');
-        //     smarturlfield.setAttribute('type','hidden');
-        //     smarturlfield.setAttribute('value',service);
-        //     smarturlfield.setAttribute('name','service');
-        //     webform.appendChild(smarturlfield);
-        // }
-    //     document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', 'true');
-    // }
-
-    // window.checkMandatory5824731000001554023 = checkMandatory5824731000001554023;
 </script>
