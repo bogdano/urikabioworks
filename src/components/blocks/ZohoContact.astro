@@ -1,9 +1,7 @@
 ---
 import Head from '../Head.astro'
 ---
-<Head>
-    <script src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
-</Head>
+<script is:inline src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
 
 <div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
     <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' accept-charset='UTF-8'>
@@ -11,7 +9,7 @@ import Head from '../Head.astro'
         <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
         <input type='text' style='display:none;' name='xmIwtLD' value='b9285b5efc547d2cffec1fb5a9ad053c09ba97503db58a298a2a831a8ad55bc01356f4e7b2d0e80ba3a978cfffda8d53'></input>
         <input type='text'  style='display:none;' name='actionType' value='TGVhZHM='></input>
-        <input type='text' style='display:none;' name='returnURL' value='https&#x3a;&#x2f;&#x2f;urikabioworks.com&#x2f;thank-you' > </input>
+        <input type='text' style='display:none;' name='returnURL' value='https&#x3a;&#x2f;&#x2f;urikabioworks.com&#x2f;thank-you'></input>
 
         <div class="flex flex-col md:flex-row md:gap-4 stagger-in">
             <input type='text' required autofocus class='textinput' placeholder="First Name*" id='First_Name' aria-required='true' aria-label='First Name' name='First Name' aria-valuemax='40' maxlength='40'></input>
@@ -59,7 +57,7 @@ import Head from '../Head.astro'
 
 <script type="text/javascript">
     function renderCaptcha() {
-        let theme = window.localStorage.getItem("theme");
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
         try {
             grecaptcha.render('recap5824731000001554023', {
                 'sitekey': '6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3',
@@ -132,8 +130,8 @@ import Head from '../Head.astro'
         if(!validateEmail()){return false;}
         const token = grecaptcha.getResponse();
         if (!token) {
-          alert("Please complete the reCAPTCHA challenge.");
-          return false;
+            alert("Please complete the reCAPTCHA challenge.");
+            return false;
         }
         return true;
     }

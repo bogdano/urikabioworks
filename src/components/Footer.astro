@@ -1,6 +1,7 @@
 ---
 const { logo } = Astro.props
 ---
+
 <footer class="flex flex-col gap-2 justify-center mt-12 py-4 border-t border-urika-gray-100 dark:border-zinc-800">
     <div class="flex flex-col md:flex-row flex-wrap w-full justify-center items-center">
         <p class="font-bold">OFFICES:</p>
@@ -11,7 +12,7 @@ const { logo } = Astro.props
     <div class="flex justify-center align-middle w-full">
         <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-6 mr-2" />
         <p class="font-touche text-urika-blue-800 text-lg dark:text-urika-blue-600">
-            <a href="/contact" class="hover:underline font-extrabold">CONTACT US</a>
+            <a href="/contact" class="hover:underline font-extrabold" data-astro-prefetch>CONTACT US</a>
         </p>
     </div>
 </footer>
