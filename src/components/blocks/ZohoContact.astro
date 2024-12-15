@@ -73,6 +73,9 @@ import Head from '../Head.astro'
 </script>
 
 <script type="module" data-astro-rerun>
+    const firstField = document.getElementById('First_Name');
+    firstField.focus();
+
     import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
