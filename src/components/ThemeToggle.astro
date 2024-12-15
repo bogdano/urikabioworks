@@ -46,13 +46,9 @@
 </script>
 
 <script is:inline data-astro-rerun>
-    console.log("localstorage: " + window.localStorage.getItem("theme"))
-    console.log("prefers-color-scheme: " + window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-
     theme = (window.localStorage.getItem("theme"))
     if (!theme) { theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; }
 
-    console.log("theme: " + theme)
     metaThemeColor = document.getElementById("meta-theme-color");
     if (theme === "light") {
         document.documentElement.classList.remove("dark");
