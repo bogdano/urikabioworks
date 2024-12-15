@@ -4,6 +4,7 @@ import directus from "../../../lib/directus"
 import {  readSingleton } from '@directus/sdk';
 const global = await directus.request(readSingleton("global", { fields: ["logo"] }))
 ---
+
 <script data-astro-rerun>
     document.querySelectorAll('#content > *').forEach((el) => {
         el.classList.add('fade-in')
