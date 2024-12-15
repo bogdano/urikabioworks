@@ -2,14 +2,14 @@
 import Head from '../Head.astro'
 ---
 <Head>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
 </Head>
 
 <div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
     <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' accept-charset='UTF-8'>
-        <input type='text' style='display:none;' name='xnQsjsdp' value='fe1df9a512d4ceab8567430392eb86dfb2052859eebf93d4afe10d7fb30dccae'></input>
+        <input type='text' style='display:none;' name='xnQsjsdp' value='882d1b111bc33af6c41346235365e0602d02a836152f814cf21b58c45e7812f0'></input>
         <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
-        <input type='text' style='display:none;' name='xmIwtLD' value='f70f7d4bb17b2d26ba9d403c58bb2ad32daea82a6f77869135cf445af9199c9efbe656f12913e6acd0fe265bf97de90b'></input>
+        <input type='text' style='display:none;' name='xmIwtLD' value='d90433038f0bfbe9d3bc09e942ef55713a04413a1e579986bdd07ccbabd68c32a631e75ca70c7b5a12eb13ab7ea6fd1e'></input>
         <input type='text'  style='display:none;' name='actionType' value='TGVhZHM='></input>
         <input type='text' style='display:none;' name='returnURL' value='https&#x3a;&#x2f;&#x2f;urikabioworks.com&#x2f;thank-you' > </input>
 
@@ -27,8 +27,29 @@ import Head from '../Head.astro'
 
         <textarea class='textinput h-40 stagger-in' required aria-multiline='true' placeholder="Inquiry*" id='Description' aria-required='true' aria-label='Description' name='Description'></textarea>
 
+        <select class='zcwf_col_fld_slt hidden' role='combobox' aria-expanded='false' aria-haspopup='listbox' id='Lead_Source' aria-required='false' aria-label='Lead Source' name='Lead Source'  >
+			<option value='-None-'>-None-</option>
+			<option value='Advertisement'>Advertisement</option>
+			<option value='Cold&#x20;Call'>Cold Call</option>
+			<option value='Employee&#x20;Referral'>Employee Referral</option>
+			<option value='External&#x20;Referral'>External Referral</option>
+			<option value='Online&#x20;Store'>Online Store</option>
+			<option value='Twitter'>Twitter</option>
+			<option value='Facebook'>Facebook</option>
+			<option value='Partner'>Partner</option>
+			<option value='Google&#x2b;'>Google&#x2b;</option>
+			<option value='Public&#x20;Relations'>Public Relations</option>
+			<option value='Sales&#x20;Email&#x20;Alias'>Sales Email Alias</option>
+			<option value='Seminar&#x20;Partner'>Seminar Partner</option>
+			<option value='Internal&#x20;Seminar'>Internal Seminar</option>
+			<option value='Trade&#x20;Show'>Trade Show</option>
+			<option value='Web&#x20;Download'>Web Download</option>
+			<option selected value='Web&#x20;Research'>Web Research</option>
+			<option value='Chat'>Chat</option>
+		</select>
+
         <div class="self-center mx-auto w-min h-min mb-4 stagger-in">
-            <div class='g-recaptcha' data-sitekey='6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3' data-theme='light' data-callback='rccallback5824731000001554023' captcha-verified='false' id='recap5824731000001554023'></div>
+            <div id='recap5824731000001554023'></div>
             <div id='recapErr5824731000001554023' class="text-center" style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. Please try again.</div>
         </div>
 
@@ -36,13 +57,28 @@ import Head from '../Head.astro'
     </form>
 </div>
 
+<script type="text/javascript">
+    function renderCaptcha() {
+        let theme = window.localStorage.getItem("theme");
+        try {
+            grecaptcha.render('recap5824731000001554023', {
+                'sitekey': '6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3',
+                'callback': 'rccallback5824731000001554023',
+                'theme': theme
+            });
+        } catch (error) {
+            console.log("renderCaptcha error", error);
+        }
+    }
+</script>
+
 <script type="module" data-astro-rerun>
     import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
            	{ opacity: [0, 1] },
       		{ delay: stagger(0.1), duration: 0.5},
-            { ease: [0.39, 0.24, 0.3, 1] },
+            { ease: 'easeOut' },
         );
     })
 
