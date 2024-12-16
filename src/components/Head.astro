@@ -29,13 +29,18 @@ const { title, description, logo, social_image } = Astro.props
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
 
-	<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
+	<script is:inline type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
     <script type="text/partytown">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('c onfig', 'G-DE1V0W2386');
+        document.addEventListener("astro:page-load", () => {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag() {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag("js", new Date());
+          window.gtag("config", "G-DE1V0W2386");
+        });
     </script>
+
 	<slot />
 	<noscript>
         <style>

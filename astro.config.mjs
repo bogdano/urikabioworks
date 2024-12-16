@@ -14,7 +14,9 @@ export default defineConfig({
   site: "https://urikabioworks.com",
   integrations: [
     tailwind(),
-    partytown(),
+    partytown({
+      config: { forward: ["dataLayer.push"] },
+    }),
     sitemap({
       filter: (page) => page !== "https://urikabioworks.com/thank-you",
     }),
