@@ -5,8 +5,6 @@ import tailwind from "@astrojs/tailwind";
 
 import netlify from "@astrojs/netlify";
 
-import partytown from "@astrojs/partytown";
-
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -14,9 +12,6 @@ export default defineConfig({
   site: "https://urikabioworks.com",
   integrations: [
     tailwind(),
-    partytown({
-      config: { forward: ["dataLayer.push"] },
-    }),
     sitemap({
       filter: (page) => page !== "https://urikabioworks.com/thank-you",
     }),
