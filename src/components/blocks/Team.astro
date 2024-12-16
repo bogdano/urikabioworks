@@ -15,7 +15,7 @@ const team_members = await directus.request(readItems("team_members", {
             <div class="flex flex-col items-center md:flex-row lg:self-end md:mr-4">
                 <div class="flex flex-col md:self-end text-center md:text-right pr-4 pb-4">
                     <h2 class="text-3xl font-bold leading-8 mb-1">{member.name}</h2>
-                    <h3 class="text-2xl text-urika-orange-500 leading-6 font-extrabold">{member.title}</h3>
+                    <h3 class="text-2xl text-urika-orange-600 dark:text-urika-orange-500 leading-6 font-extrabold">{member.title}</h3>
                 </div>
                 <div class="w-72 h-72 rounded-2xl md:self-start bg-zinc-100 dark:bg-zinc-800">
                     { member.headshot && (
