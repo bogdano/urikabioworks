@@ -1,6 +1,7 @@
 ---
 import Head from '../Head.astro'
 ---
+
 <script is:inline src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
 
 <div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
@@ -46,8 +47,8 @@ import Head from '../Head.astro'
 			<option value='Chat'>Chat</option>
 		</select>
 
-        <div class="self-center mx-auto w-min h-min mb-4 stagger-in">
-            <div id='recap5824731000001554023'></div>
+        <div class="mx-auto w-min h-min stagger-in">
+            <div id='recap5824731000001554023' class="g-recaptcha"></div>
             <div id='recapErr5824731000001554023' class="text-center" style='font-size:12px;color:red;visibility:hidden;'>Captcha validation failed. Please try again.</div>
         </div>
 
@@ -62,7 +63,7 @@ import Head from '../Head.astro'
             grecaptcha.render('recap5824731000001554023', {
                 'sitekey': '6LctNJsqAAAAAKeS07e9XJWDHYkBt4MoE-6XiQj3',
                 'callback': 'rccallback5824731000001554023',
-                'theme': theme
+                'theme': theme,
             });
         } catch (error) {
             console.log("renderCaptcha error", error);

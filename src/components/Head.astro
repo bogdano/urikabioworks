@@ -1,16 +1,41 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-const { title, description, logo } = Astro.props
+const { title, description, logo, social_image } = Astro.props
 ---
 
 <head>
-	<title>{title}</title>
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/svg+xml" href={"https://admin.urikabioworks.com/assets/" + logo} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 	<meta name="generator" content={Astro.generator} />
-	<meta name="description" content={description} />
 	<meta name="theme-color" content="" id="meta-theme-color" />
+
+	<!-- Primary Meta Tags -->
+	<title>{title}</title>
+	<meta name="title" content={title} />
+	<meta name="description" content={description} />
+	<link rel="canonical" href={Astro.url} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
+
+	<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
+    <script type="text/partytown">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('c onfig', 'G-DE1V0W2386');
+    </script>
 	<slot />
 	<noscript>
         <style>

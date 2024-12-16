@@ -10,21 +10,18 @@ const { image, title, subtitle, tagline } = Astro.props;
     .logo-subtitle {
         font-size: clamp(1.75rem, 3.05vw, 3.5rem);
         letter-spacing: 0.35em;
-        line-height: 1.2em;
+        /* line-height: 1.2em; */
     }
     .logo-tagline {
         font-size: clamp(1rem, 1.75vw, 2rem);
-        line-height: 2em;
     }
     .left-bracket, .right-bracket {
         font-size: clamp(1.85rem, 3.25vw, 3.75rem);
     }
     .left-bracket {
-        line-height: 2rem;
         letter-spacing: 0.35em;
     }
     .right-bracket {
-        line-height: 2rem;
     }
 
     .hero-block {
@@ -34,13 +31,15 @@ const { image, title, subtitle, tagline } = Astro.props;
 </style>
 
 <div class="hero-block flex flex-col items-center">
-    <div class="flex-grow flex flex-col items-center justify-center mb-8 fade-up">
-        <img style="height: 40dvh;" class="transition mb-12" src={`https://admin.urikabioworks.com/assets/${image}`} alt="URIKA Logo" loading="lazy" />
+    <div class="flex-grow flex flex-col items-center justify-center mb-16 fade-up">
+        <img style="height: 40dvh; width: auto;" class="transition mb-4" src={`https://admin.urikabioworks.com/assets/${image}`} alt="URIKA Logo" loading="lazy" />
         <h1 class="text-center">
-            <span class="font-urika text-urika-gray-400 logo-title mb-3 block">{title}</span>
-            <span class="left-bracket font-touche text-urika-gray-400">[</span>
-            <span class="font-touche bold text-urika-gray-400 logo-subtitle">{subtitle}</span>
-            <span class="right-bracket font-touche text-urika-gray-400">]</span>
+            <span class="font-urika text-urika-gray-400 logo-title mb-1 block">{title}</span>
+            <div class="flex flex-row mx-auto items-baseline justify-between">
+                <span class="block left-bracket font-touche text-urika-gray-400">[</span>
+                <span class="block font-touche bold text-urika-gray-400 logo-subtitle">{subtitle}</span>
+                <span class="block right-bracket font-touche text-urika-gray-400">]</span>
+            </div>
             <span class="font-touche text-urika-gray-500 dark:text-urika-gray-400 logo-tagline block">{tagline}</span>
         </h1>
     </div>

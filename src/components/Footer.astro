@@ -2,16 +2,16 @@
 const { logo } = Astro.props
 ---
 
-<footer class="flex flex-col gap-2 justify-center mt-12 py-4 border-t border-urika-gray-100 dark:border-zinc-800">
+<footer class="flex flex-col gap-1 justify-center mt-12 pt-4 pb-2 border-t border-urika-gray-100 dark:border-zinc-800">
     <div class="flex flex-col md:flex-row flex-wrap w-full justify-center items-center">
         <p class="font-bold">OFFICES:</p>
-        <p class="ml-4">Palmetto, FL</p>
-        <p class="ml-4">San Diego, CA</p>
-        <p class="ml-4">Haddon Township, NJ</p>
+        <p class="md:ml-4">Palmetto, FL</p>
+        <p class="md:ml-4">San Diego, CA</p>
+        <p class="md:ml-4">Haddon Township, NJ</p>
     </div>
     <div class="flex justify-center align-middle w-full">
-        <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-6 mr-2" />
-        <p class="font-touche text-urika-blue-800 text-lg dark:text-urika-blue-600">
+        <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-7 mr-1" />
+        <p class="font-touche text-urika-blue-800 text-lg dark:text-urika-blue-600 self-center">
             <a href="/contact" class="hover:underline font-extrabold" data-astro-prefetch>CONTACT US</a>
         </p>
     </div>

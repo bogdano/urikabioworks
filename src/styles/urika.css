@@ -78,7 +78,7 @@
 }
 
 article {
-  min-height: calc(100vh - 12rem);
+  min-height: calc(100dvh - 8rem);
 }
 
 .menu-btn {
