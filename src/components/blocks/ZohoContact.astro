@@ -3,8 +3,8 @@
 
 <script is:inline src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
 
-<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto stagger-container'>
-    <form id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' accept-charset='UTF-8'>
+<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm max-w-3xl mx-auto'>
+    <form class="stagger-container" id='webform5824731000001554023' action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads5824731000001554023 method='POST' accept-charset='UTF-8'>
         <input type='text' style='display:none;' name='xnQsjsdp' value='832fc88c3d0f4351b5d31eb30a0b613edf9f1346ae698923efcf10d8b87733fd'></input>
         <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
         <input type='text' style='display:none;' name='xmIwtLD' value='b9285b5efc547d2cffec1fb5a9ad053c09ba97503db58a298a2a831a8ad55bc01356f4e7b2d0e80ba3a978cfffda8d53'></input>
@@ -16,7 +16,7 @@
             <input type='text' required class='textinput' placeholder="Last Name*" id='Last_Name' aria-required='true' aria-label='Last Name' name='Last Name' aria-valuemax='80' maxlength='80'></input>
         </div>
 
-        <input type='email' required class='textinput stagger-in' placeholder="your@address.com*" id='Email' aria-required='true' aria-label='Email' name='Email' aria-valuemax='100' maxlength='100'></input>
+        <input style="-webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden;" type='email' required class='textinput stagger-in' placeholder="your@address.com*" id='Email' aria-required='true' aria-label='Email' name='Email' aria-valuemax='100' maxlength='100'></input>
 
         <div class="flex flex-col md:flex-row md:gap-4 stagger-in">
             <input type='text' required class='textinput' placeholder="Company*" id='Company' aria-required='true' aria-label='Company' name='Company' aria-valuemax='200' maxlength='200'></input>
@@ -80,8 +80,8 @@
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
            	{ opacity: [0, 1] },
-      		{ delay: stagger(0.1), duration: 0.5},
-            { ease: 'easeOut' },
+      		{ delay: stagger(0.1), duration: 0.5 },
+            { ease: [0.39, 0.24, 0.3, 1] },
         );
     })
 
