@@ -19,4 +19,7 @@ export default defineConfig({
   output: "static",
   adapter: netlify(),
   prefetch: true,
+  experimental: {
+    clientPrerender: true,
+  },
 });
