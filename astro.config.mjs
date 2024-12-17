@@ -7,6 +7,8 @@ import netlify from "@astrojs/netlify";
 
 import sitemap from "@astrojs/sitemap";
 
+import partytown from "@astrojs/partytown";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://urikabioworks.com",
@@ -14,6 +16,9 @@ export default defineConfig({
     tailwind(),
     sitemap({
       filter: (page) => page !== "https://urikabioworks.com/thank-you",
+    }),
+    partytown({
+      config: { forward: ["dataLayer.push"] },
     }),
   ],
   output: "static",

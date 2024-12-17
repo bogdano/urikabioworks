@@ -29,23 +29,13 @@ const { title, description, logo, social_image } = Astro.props
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
 
-	<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
-    <script>
-        declare global {
-            interface Window {
-                dataLayer: any[];
-                gtag: (...args: any[]) => void;
-            }
-        }
-        // send page view event to Google Analytics when using Astro's client-side routing
-        document.addEventListener("astro:page-load", () => {
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = function gtag(...args: any[]) {
-                window.dataLayer.push(arguments);
-            };
-            window.gtag("js", new Date());
-            window.gtag("config", "G-DE1V0W2386");
-        });
+	<!-- Google tag (gtag.js) -->
+    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
+    <script type="text/partytown">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DE1V0W2386');
     </script>
 
 	<slot />
