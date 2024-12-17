@@ -30,8 +30,8 @@ const { title, description, logo, social_image } = Astro.props
     <meta property="twitter:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
 
 	<!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
-    <script is:inline>
+    <script defer is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
+    <script is:inline type="module">
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());

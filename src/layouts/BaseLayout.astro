@@ -30,7 +30,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
         <Footer logo={global.logo} />
 	</body>
 
-	<script type="module" data-astro-rerun>
+	<script is:inline type="module" data-astro-rerun>
    	    import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
         inView(".fade-up", ({ target }) => {
           animate(target,

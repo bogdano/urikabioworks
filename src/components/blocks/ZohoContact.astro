@@ -1,5 +1,4 @@
 ---
-import Head from '../Head.astro'
 ---
 
 <script is:inline src="https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit" async defer></script>
@@ -56,7 +55,7 @@ import Head from '../Head.astro'
     </form>
 </div>
 
-<script type="text/javascript">
+<script is:inline type="text/javascript">
     function renderCaptcha() {
         let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
         try {
@@ -71,7 +70,7 @@ import Head from '../Head.astro'
     }
 </script>
 
-<script type="module" data-astro-rerun>
+<script is:inline type="module" data-astro-rerun>
     const firstField = document.getElementById('First_Name');
     setTimeout(() => {
         firstField.focus();

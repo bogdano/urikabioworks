@@ -30,7 +30,7 @@ const team_members = await directus.request(readItems("team_members", {
     ))}
 </div>
 
-<script type="module" data-astro-rerun>
+<script is:inline type="module" data-astro-rerun>
     import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
