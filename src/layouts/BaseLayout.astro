@@ -52,5 +52,11 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
                 { duration: 0.9, ease: [0.39, 0.24, 0.3, 1] }
             );
         })
+        inView(".fade-right", ({ target }) => {
+            animate(target,
+                { opacity: [0, 1], x: [15, 0] },
+                { duration: 0.9, ease: [0.39, 0.24, 0.3, 1] }
+            );
+        })
     </script>
 </html>

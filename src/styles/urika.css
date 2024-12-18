@@ -73,6 +73,7 @@
 .fade-in,
 .fade-up,
 .fade-left,
+.fade-right,
 .stagger-in {
   opacity: 0;
 }
