@@ -1,40 +1,153 @@
 <script>
-import { authentication, createDirectus, rest } from "@directus/sdk";
+  import { onMount } from 'svelte';
+  import { directusFetch } from '../../lib/directusFetch.ts'
 
-const client = createDirectus('https://admin.urikabioworks.com').with(authentication()).with(rest());
-const authToken = typeof window != 'undefined' ? window?.localStorage.getItem('publications.access_token') : undefined
-const user = typeof window != 'undefined' ? window?.localStorage.getItem('publications.user') : undefined
-const randomPassword = (length=12) => Math.random().toString(20)
+  // "Global" state that determines which form to show
+  let step = 'enter-email';
 
-if (authToken) {
-    client.setToken(authToken)
-}
+  let email = 'bogdan.boskovic@urikabioworks.com';
+  const randomPassword = (length=12) => Math.random().toString(20)
+  let password = randomPassword();
+  let firstName = '';
+  let lastName = '';
+  let company = '';
+  let title = '';
+  let message = '';
+  let otp = '';
+  let accessToken = '';
+  let refreshToken = '';
 
-async function handleSubmit(event) {
-    event.preventDefault();
-    const formEl = event.currentTarget;
-    const formData = new FormData(formEl);
-    // Convert FormData to a simple JS object
-    const data = Object.fromEntries(formData.entries());
+  // Called when user first visits page
+  onMount(() => {
+    const storedAccessToken = localStorage.getItem('publications.access_token');
+    const storedRefreshToken = localStorage.getItem('publications.refresh_token');
+    if (storedAccessToken) {
+      accessToken = storedAccessToken;
+      refreshToken = storedRefreshToken; // might be null if not stored yet
+      step = 'success'; // or validate token with an API call
+    }
+  });
 
-    // Now POST JSON to your Flow
-    const res = await fetch('https://admin.urikabioworks.com/flows/trigger/91684db5-7bdb-47dd-8255-d6d7f1d7bea4', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+  // 1) Submit email to Flow 1 (check if user exists, possibly trigger Flow 2 or tell us to register).
+  async function handleEmailSubmit() {
+    try {
+      const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/8dccc9f3-e88e-4d6f-be2b-85ec39d4a9d6', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (data.user_exists === true) {
+        step = 'otp';
+      } else {
+        console.log(data.user_exists)
+        step = 'registration';
+      }
+    } catch (err) {
+      console.error('Error in handleEmailSubmit:', err);
+    }
+  }
+
+  // 2) Register new user, then (Flow 4) triggers Flow 2 to generate OTP
+  async function handleRegistrationSubmit() {
+    try {
+      const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/flow4-register-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+          company,
+          title,
+          message
+        })
+      });
+      const data = await res.json();
+      /**
+       * If successful, the response might indicate that it triggered Flow 2
+       * so the user can proceed to "otp" step.
+       */
+      if (data.success) {
+        step = 'otp';
+      } else {
+        console.error('Registration failed:', data);
+      }
+    } catch (err) {
+      console.error('Error in handleRegistrationSubmit:', err);
+    }
+  }
+
+  // 3) Verify OTP (Flow 3), get tokens if successful
+  async function handleOtpSubmit() {
+    try {
+      const focusField = document.querySelector('.focus');
+      if (focusField) { focusField.focus(); focusField.select(); }
+
+      const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/533b7ee1-04aa-4930-9e07-abab76fe53d8', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+      });
+      const data = await res.json();
+      /**
+       * If valid, Flow 3 would have:
+       *  - set user status to "Active"
+       *  - done an internal POST to /auth/login
+       *  - returned { "access_token": "...", "refresh_token": "..." }
+       */
+      if (data.access_token) {
+        accessToken = data.access_token;
+        refreshToken = data.refresh_token || '';
+
+        localStorage.setItem('publications.access_token', accessToken);
+        localStorage.setItem('publications.refresh_token', refreshToken);
+
+        step = 'success';
+      } else {
+        console.error('OTP validation failed:', data);
+      }
+    } catch (err) {
+      console.error('Error in handleOtpSubmit:', err);
+    }
   }
 </script>
 
-{#if authToken}
-    <p>Welcome back, {user}</p>
-{:else}
-    <form on:submit={handleSubmit}>
-        <input type="text" name="first_name" placeholder="First Name">
-        <input type="email" name="email" placeholder="email@address.com">
-        <input type="hidden" name="password" value={randomPassword()}>
-        <button type="submit">Login</button>
-    </form>
+{#if step === 'enter-email'}
+  <div>
+    <h2>Access Publications</h2>
+    <p>Enter your email address to continue.</p>
+    <input class="textinput" type="email" bind:value={email} placeholder="you@example.com" autocomplete="on" />
+    <button class="button" on:click={handleEmailSubmit}>Next</button>
+  </div>
+
+{:else if step === 'registration'}
+  <div>
+    <h2>Register</h2>
+    <input class="textinput" type="email" value={email} placeholder="your@address.com *" />
+    <div class="flex flex-col md:flex-row gap-4">
+        <input autofocus class="textinput focus" type="text" bind:value={firstName} placeholder="First Name *" />
+        <input class="textinput" type="text" bind:value={lastName} placeholder="Last Name *" />
+    </div>
+    <div class="flex flex-col md:flex-row gap-4">
+        <input class="textinput" type="text" bind:value={company} placeholder="Company *" />
+        <input class="textinput" type="text" bind:value={title} placeholder="Title *" />
+    </div>
+    <textarea class="textinput" bind:value={message} placeholder="Your introductory message..."></textarea>
+    <button class="button" on:click={handleRegistrationSubmit}>Register</button>
+  </div>
+
+{:else if step === 'otp'}
+  <div>
+    <h2>Check your email for your OTP</h2>
+    <input autofocus class="textinput focus" type="text" bind:value={otp} placeholder="Enter OTP code" />
+    <button class="button" on:click={handleOtpSubmit}>Submit OTP</button>
+  </div>
+
+{:else if step === 'success'}
+  <div>
+    <h2>Success!</h2>
+    <p>You are logged in. Now you can access protected content.</p>
+  </div>
 {/if}
