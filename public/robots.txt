@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /thank-you
+Disallow: /publications/
 Sitemap: https://urikabioworks.com/sitemap-index.xml
