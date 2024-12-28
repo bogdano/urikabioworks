@@ -7,45 +7,45 @@ import { readItems, readSingleton } from '@directus/sdk';
 const global = await directus.request(readSingleton("global", { fields: ["title", "seo_description"] }))
 
 export async function getStaticPaths() {
-  const pages = await directus.request(readItems("pages", {
-    filter: {
-      status: { _eq: "published" },
-    },
-    fields: [
-      "title", "permalink", "seo_description",
-      {
-        blocks: [
-          "*",
-          {
-            item: {
-              block_hero: ["image", "title", "subtitle", "tagline"],
-              block_expertise: ["title",
-                {
-                  expertise_items: ["image", "content"],
-                },
-              ],
-              block_offerings: ["title",
-                {
-                    offerings: ["title", "paragraph_1", "paragraph_2", "link"],
-                },
-              ],
-              block_html: ["content"],
-              block_team: ["id", "title", {
-                block_section: ["section"],
-              }],
-              block_zoho_contact_form: [],
-              block_header: ["branded", "title"],
-              block_partners: [],
+    const pages = await directus.request(readItems("pages", {
+        filter: {
+            status: { _eq: "published" },
+        },
+        fields: [
+          "title", "permalink", "seo_description",
+            {
+                blocks: [
+                    "*",
+                    {
+                        item: {
+                            block_hero: ["image", "title", "subtitle", "tagline"],
+                            block_expertise: ["title",
+                                {
+                                    expertise_items: ["image", "content"],
+                                },
+                            ],
+                            block_offerings: ["title",
+                                {
+                                    offerings: ["title", "paragraph_1", "paragraph_2", "link"],
+                                },
+                            ],
+                            block_html: ["content"],
+                            block_team: ["id", "title", {
+                                block_section: ["section"],
+                            }],
+                            block_zoho_contact_form: [],
+                            block_header: ["branded", "title"],
+                            block_partners: [],
+                        },
+                    },
+                ],
             },
-          },
         ],
-      },
-    ],
-  }))
-  return pages.map((page) => ({
-    params: { permalink: page.permalink },
-    props: page,
-  }))
+    }))
+    return pages.map((page) => ({
+        params: { permalink: page.permalink },
+        props: page,
+    }))
 }
 const page = Astro.props
 ---
