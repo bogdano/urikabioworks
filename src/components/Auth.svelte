@@ -109,7 +109,7 @@
 
         step = 'success';
       } else {
-        console.error('OTP validation failed:', data);
+        console.error('OTP validation failed:', response);
       }
     } catch (err) {
       console.error('Error in handleOtpSubmit:', err);
