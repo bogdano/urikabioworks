@@ -29,16 +29,7 @@ const { title, description, logo, social_image } = Astro.props
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={"https://admin.urikabioworks.com/assets/" + social_image} />
 
-	<!-- Google tag (gtag.js) -->
-    <script defer is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DE1V0W2386"></script>
-    <script is:inline type="module" defer>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-DE1V0W2386');
-    </script>
-
-	<slot />
+    <script defer src="https://analytics.urikabioworks.com/script.js" data-website-id="bfa6d6b6-9504-4d7d-bd99-b33d0dd6d8b5"></script>
 	<noscript>
         <style>
             .fade-up, .fade-up, .fade-left, .fade-right, .stagger-in {

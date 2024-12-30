@@ -1,4 +1,6 @@
 <script>
+  import { authentication, createDirectus, rest } from "@directus/sdk";
+  const client = createDirectus('https://admin.urikabioworks.com').with(authentication()).with(rest());
   import { onMount } from 'svelte';
   import { directusFetch } from '../../lib/directusFetch.ts'
 
@@ -22,6 +24,7 @@
     const storedAccessToken = localStorage.getItem('publications.access_token');
     const storedRefreshToken = localStorage.getItem('publications.refresh_token');
     if (storedAccessToken) {
+      client.setToken(storedAccessToken)
       accessToken = storedAccessToken;
       refreshToken = storedRefreshToken; // might be null if not stored yet
       step = 'success'; // or validate token with an API call
@@ -90,16 +93,16 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp })
       });
-      const data = await res.json();
+      const response = await res.json();
       /**
        * If valid, Flow 3 would have:
        *  - set user status to "Active"
        *  - done an internal POST to /auth/login
        *  - returned { "access_token": "...", "refresh_token": "..." }
        */
-      if (data.access_token) {
-        accessToken = data.access_token;
-        refreshToken = data.refresh_token || '';
+      if (response.data.access_token) {
+        accessToken = response.data.access_token;
+        refreshToken = response.data.refresh_token || '';
 
         localStorage.setItem('publications.access_token', accessToken);
         localStorage.setItem('publications.refresh_token', refreshToken);
@@ -148,6 +151,7 @@
 {:else if step === 'success'}
   <div>
     <h2>Success!</h2>
+
     <p>You are logged in. Now you can access protected content.</p>
   </div>
 {/if}
