@@ -22,17 +22,19 @@ export async function getStaticPaths() {
                             block_expertise: ["title",
                                 {
                                     expertise_items: ["image", "content"],
-                                },
+                                }
                             ],
                             block_offerings: ["title",
                                 {
                                     offerings: ["title", "paragraph_1", "paragraph_2", "link"],
-                                },
+                                }
                             ],
                             block_html: ["content"],
-                            block_team: ["id", "title", {
-                                block_section: ["section"],
-                            }],
+                            block_team: ["id", "title",
+                                {
+                                    block_section: ["section"],
+                                }
+                            ],
                             block_zoho_contact_form: [],
                             block_header: ["branded", "title"],
                             block_partners: [],

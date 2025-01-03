@@ -28,7 +28,7 @@ export async function directusFetch(
   // Check if we need to refresh token
   if (response.status === 401 && refreshToken) {
     // Attempt to refresh the token
-    const refreshRes = await fetch("https://your-directus.com/auth/refresh", {
+    const refreshRes = await fetch("https://admin.urikabioworks.com/auth/refresh", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

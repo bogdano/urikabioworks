@@ -1,0 +1,16 @@
+---
+import ContactFormSvelte from './ContactForm.svelte'
+---
+
+<ContactFormSvelte client:load />
+
+<script is:inline type="module" data-astro-rerun>
+    import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+    inView(".stagger-container", ({ target }) => {
+        animate(".stagger-in",
+           	{ opacity: [0, 1] },
+      		{ delay: stagger(0.1), duration: 0.5 },
+            { ease: [0.39, 0.24, 0.3, 1] },
+        );
+    })
+</script>

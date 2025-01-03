@@ -7,7 +7,7 @@
   // "Global" state that determines which form to show
   let step = 'enter-email';
 
-  let email = 'bogdan.boskovic@urikabioworks.com';
+  let email = '';
   const randomPassword = (length=12) => Math.random().toString(20)
   let password = randomPassword();
   let firstName = '';
@@ -54,7 +54,7 @@
   // 2) Register new user, then (Flow 4) triggers Flow 2 to generate OTP
   async function handleRegistrationSubmit() {
     try {
-      const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/flow4-register-user', {
+      const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/91684db5-7bdb-47dd-8255-d6d7f1d7bea4', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -64,7 +64,8 @@
           password,
           company,
           title,
-          message
+          message,
+          source: 'publications'
         })
       });
       const data = await res.json();
@@ -72,10 +73,11 @@
        * If successful, the response might indicate that it triggered Flow 2
        * so the user can proceed to "otp" step.
        */
-      if (data.success) {
+      if (data.user_created === true) {
         step = 'otp';
       } else {
         console.error('Registration failed:', data);
+        step = 'enter-email';
       }
     } catch (err) {
       console.error('Error in handleRegistrationSubmit:', err);
@@ -128,7 +130,7 @@
 {:else if step === 'registration'}
   <div>
     <h2>Register</h2>
-    <input class="textinput" type="email" value={email} placeholder="your@address.com *" />
+    <input class="textinput" type="email" bind:value={email} placeholder="your@address.com *" />
     <div class="flex flex-col md:flex-row gap-4">
         <input autofocus class="textinput focus" type="text" bind:value={firstName} placeholder="First Name *" />
         <input class="textinput" type="text" bind:value={lastName} placeholder="Last Name *" />

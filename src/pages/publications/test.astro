@@ -1,9 +1,9 @@
 ---
 // export const prerender = false
-import Auth from '../../components/Auth.svelte'
+import PublicationsForm from '../../components/PublicationsForm.svelte'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 ---
 
 <BaseLayout title="URIKA [bioworks] - Login">
-    <Auth client:only />
+    <PublicationsForm client:load />
 </BaseLayout>
