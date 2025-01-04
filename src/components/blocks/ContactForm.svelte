@@ -163,20 +163,21 @@
                 })
             });
             const data = await res.json();
-            if (!data.error) {
+            if (data.success) {
                 localStorage.setItem('first_name', firstName);
                 localStorage.setItem('last_name', lastName);
                 localStorage.setItem('company', company);
                 localStorage.setItem('title', title);
                 step = 'logged-in';
                 message = '';
-                alertMessage = 'Your update and message have been sent.';
+                alertMessage = data.alertMessage;
             } else {
                 throw new Error(data.error);
                 step = 'logged-in';
             }
         } catch (err) {
             console.error('Error in handleSupplementSubmit:' + JSON.stringify(err));
+            alertMessage = err;
         }
     }
 </script>
