@@ -33,6 +33,8 @@
         if (accessToken) {
             client.setToken(accessToken)
             step = 'logged-in'; // or validate token with an API call
+        } else {
+            step = 'registration';
         }
         const firstField = document.getElementById('firstField');
         setTimeout(() => firstField?.focus(), 400);
