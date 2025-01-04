@@ -53,21 +53,12 @@
 
 ::-moz-selection {
   /* Code for Firefox */
-  background: #fde2ab;
+  background: rgba(253, 226, 171, 0.9);
+  color: black;
 }
 ::selection {
-  background: #fde2ab;
-}
-@media (prefers-color-scheme: dark) {
-  ::-moz-selection {
-    /* Code for Firefox */
-    background: #bf5a0f;
-    color: white;
-  }
-  ::selection {
-    background: #bf5a0f;
-    color: white;
-  }
+  background: rgba(253, 226, 171, 0.9);
+  color: black;
 }
 
 .fade-in,

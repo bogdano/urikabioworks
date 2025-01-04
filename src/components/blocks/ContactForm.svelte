@@ -6,7 +6,7 @@
     import { directusFetch } from '../../../lib/directusFetch.ts'
 
     // "Global" state that determines which form to show
-    let step = '';
+    let step = 'registration';
 
     let userId = '';
     let email = '';
@@ -37,7 +37,7 @@
             step = 'registration';
         }
         const firstField = document.getElementById('firstField');
-        setTimeout(() => firstField?.focus(), 400);
+        setTimeout(() => firstField?.focus(), 600);
     });
 
     async function handleEmailSubmit(e) {
