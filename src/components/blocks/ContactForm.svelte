@@ -6,7 +6,7 @@
     import { directusFetch } from '../../../lib/directusFetch.ts'
 
     // "Global" state that determines which form to show
-    let step = 'registration';
+    let step = '';
 
     let userId = '';
     let email = '';

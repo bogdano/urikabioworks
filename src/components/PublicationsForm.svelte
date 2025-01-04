@@ -3,11 +3,10 @@ import { authentication, createDirectus, rest } from "@directus/sdk";
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 import { directusFetch } from '../../lib/directusFetch.ts';
-    import directus from "../../lib/directus.ts";
 const client = createDirectus('https://admin.urikabioworks.com').with(authentication()).with(rest());
 
 // "Global" state that determines which form to show
-let step = 'enter-email';
+let step = '';
 
 let userId = '';
 let email = '';
@@ -139,9 +138,7 @@ async function handleOtpSubmit() {
 async function handleFileDownload() {
     try {
         const fileId = 'aa74b1ea-65d2-41ab-bd84-e321e0886747';
-
         const res = await directusFetch(`https://admin.urikabioworks.com/assets/${fileId}`)
-
         if (!res.ok) throw new Error('Failed to fetch file');
 
         const blob = await res.blob();
@@ -192,7 +189,7 @@ async function handleFileDownload() {
     </form>
 
     {:else if step === 'logged-in'}
-    <div class="flex flex-col gap-2 text-center">
+    <div class="flex flex-col gap-2 text-center" in:fade={{ duration: 400 }}>
         <h2>Success!</h2>
         <p>You are logged in. Now you can access protected content.</p>
         <button class="button" on:click={handleFileDownload}>ACCESS PAPER</button>
