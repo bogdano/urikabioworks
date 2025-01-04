@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components {
   .textinput {
-    @apply font-mono text-base md:text-xl text-black bg-white border border-zinc-400 dark:border-zinc-600 rounded-2xl p-4 w-full mb-4 focus:ring-4 focus:ring-urika-orange-200 dark:focus:ring-urika-blue-700 focus:outline-none focus:dark:border-zinc-400 focus:dark:bg-black transition-colors dark:bg-zinc-950 dark:text-white;
+    @apply font-mono text-base md:text-xl text-zinc-700 bg-white border border-zinc-300 dark:border-zinc-700 rounded-2xl p-4 w-full mb-4 focus:ring-4 focus:ring-urika-orange-200 dark:focus:ring-urika-blue-700 focus:outline-none focus:dark:border-zinc-400 focus:dark:bg-black transition-colors dark:bg-zinc-950 dark:text-white disabled:text-zinc-400 dark:disabled:text-zinc-500;
   }
   .button {
     @apply text-lg md:text-xl text-white bg-urika-blue-800 hover:bg-urika-blue-600 transition-colors font-extrabold rounded-2xl p-4 w-full mb-2 drop-shadow-lg shadow-md;

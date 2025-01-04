@@ -14,8 +14,8 @@ export async function directusFetch(
   options: RequestInit = {},
 ): Promise<Response> {
   // Retrieve tokens from localStorage
-  const accessToken = localStorage.getItem("publications.access_token");
-  const refreshToken = localStorage.getItem("publications.refresh_token");
+  const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem("refresh_token");
   // Ensure headers is an object
   const headers: HeadersInit = options.headers ? options.headers : {};
   // Attach current access token if available
@@ -42,11 +42,12 @@ export async function directusFetch(
       const newAccess = refreshData.data.access_token;
       const newRefresh = refreshData.data.refresh_token;
       // Update localStorage
-      localStorage.setItem("publications.access_token", newAccess);
-      localStorage.setItem("publications.refresh_token", newRefresh);
+      localStorage.setItem("access_token", newAccess);
+      localStorage.setItem("refresh_token", newRefresh);
       // Retry original request with the new access token
       headers["Authorization"] = `Bearer ${newAccess}`;
       response = await fetch(url, { ...options, headers });
+      console.log("Token refreshed");
     }
   }
   return response;
