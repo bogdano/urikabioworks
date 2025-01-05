@@ -30,7 +30,7 @@ const publication = Astro.props
             <p class="fade-in mt-4 indent-16 text-justify text-xl font-serif">{publication.abstract}</p>
         </div>
         <div class="lg:mt-12">
-            <PublicationsForm publication_id={publication.id} publication_title={publication.title} client:load />
+            <PublicationsForm publication_id={publication.id} client:load />
         </div>
     </div>
 </BaseLayout>

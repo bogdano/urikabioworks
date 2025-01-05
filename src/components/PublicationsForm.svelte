@@ -7,7 +7,6 @@ const client = createDirectus('https://admin.urikabioworks.com').with(authentica
 
 // from props
 export let publication_id;
-export let publication_title;
 
 // "global" state that determines which form to show
 let step = '';
@@ -174,7 +173,14 @@ async function handleOtpSubmit() {
     }
 }
 
-async function handleFileDownload() {
+// this is needed because Safari blocks blobs in newtab if window.open is called from an async function
+function handleFileDownload() {
+    const newTab = window.open('', '_blank');
+    newTab.document.write('<h1 style="text-align: center">Downloading...</h1>');
+    downloadFile(newTab);
+}
+
+async function downloadFile(newTab) {
     loading = true;
     try {
         const paper_id = await directusFetch(`https://admin.urikabioworks.com/items/publications?filter[id][_eq]=${publication_id}`);
@@ -182,18 +188,13 @@ async function handleFileDownload() {
         const paper = await paper_id.json();
         const fileId = paper.data[0].paper;
 
-        // Open a temporary blank tab immediately
-        const newTab = window.open('', '_blank');
-        if (!newTab) throw new Error('Failed to open new tab.');
-
         const res = await directusFetch(`https://admin.urikabioworks.com/assets/${fileId}`);
         if (!res.ok) throw new Error('Failed to fetch file');
-
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
-
-        // Update the blank tab with the fetched file URL
+        // Open the file in a new tab
         newTab.location.href = url;
+
         // hit the webhook to create a new Publications Read record
         const readRes = await directusFetch('https://admin.urikabioworks.com/flows/trigger/e6002984-a859-4132-9044-bca316d0c98c', {
             method: 'POST',
