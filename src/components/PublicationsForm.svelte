@@ -182,12 +182,18 @@ async function handleFileDownload() {
         const paper = await paper_id.json();
         const fileId = paper.data[0].paper;
 
+        // Open a temporary blank tab immediately
+        const newTab = window.open('', '_blank');
+        if (!newTab) throw new Error('Failed to open new tab.');
+
         const res = await directusFetch(`https://admin.urikabioworks.com/assets/${fileId}`);
         if (!res.ok) throw new Error('Failed to fetch file');
+
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
-        // Open the file in a new tab
-        window.open(url, '_blank');
+
+        // Update the blank tab with the fetched file URL
+        newTab.location.href = url;
         // hit the webhook to create a new Publications Read record
         const readRes = await directusFetch('https://admin.urikabioworks.com/flows/trigger/e6002984-a859-4132-9044-bca316d0c98c', {
             method: 'POST',
