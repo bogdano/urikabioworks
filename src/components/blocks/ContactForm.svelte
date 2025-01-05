@@ -7,6 +7,7 @@
 
     // "Global" state that determines which form to show
     let step = 'registration';
+    let loading = false;
 
     let userId = '';
     let email = '';
@@ -41,6 +42,7 @@
     });
 
     async function handleEmailSubmit(e) {
+        loading = true;
         try {
             const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/8dccc9f3-e88e-4d6f-be2b-85ec39d4a9d6', {
                 method: 'POST',
@@ -55,11 +57,14 @@
             }
         } catch (err) {
             console.error('Error in handleEmailSubmit:', err);
+        } finally {
+            loading = false;
         }
     }
 
     async function handleRegistrationSubmit() {
         errorMessage = '';
+        loading = true;
         try {
             const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/91684db5-7bdb-47dd-8255-d6d7f1d7bea4', {
                 method: 'POST',
@@ -85,10 +90,13 @@
         } catch (err) {
             console.error('Error in handleRegistrationSubmit:', err);
             errorMessage = 'Failed to create user' + err;
+        } finally {
+            loading = false;
         }
     }
 
     async function handleOtpSubmit() {
+        loading = true;
         try {
             errorMessage = '';
             const res = await fetch('https://admin.urikabioworks.com/otp-login', {
@@ -147,10 +155,13 @@
         } catch (err) {
             console.error('Error in handleOtpSubmit:', err);
             errorMessage = err;
+        } finally {
+            loading = false;
         }
     }
 
     async function handleSupplementSubmit() {
+        loading = true;
         try {
             const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/d840e527-baac-4d27-83c4-2c268fd022db', {
                 method: 'POST',
@@ -180,6 +191,8 @@
         } catch (err) {
             console.error('Error in handleSupplementSubmit:' + JSON.stringify(err));
             alertMessage = err;
+        } finally {
+            loading = false;
         }
     }
 </script>
@@ -202,7 +215,12 @@
             <input required class="textinput" type="text" bind:value={title} placeholder="Title *" />
         </div>
         <textarea required class="stagger-in h-60 textinput" bind:value={message} placeholder="Your introductory message..."></textarea>
-        <button type="submit" class='button stagger-in'>Send</button>
+        <button type="submit" class='button stagger-in'>
+            Send
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
 
     {:else if step === 'otp'}
@@ -218,7 +236,12 @@
             </div>
         {/if}
         <input required autofocus class="textinput" type="text" bind:value={otp} placeholder="Enter OTP code" />
-        <button type="submit" class='button'>Verify</button>
+        <button type="submit" class='button'>
+            Verify
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
 
     {:else if step === 'logged-in'}
@@ -243,7 +266,12 @@
             <input class="textinput" type="text" bind:value={title} placeholder="Title *" />
         </div>
         <textarea class="h-60 textinput" bind:value={message} placeholder="Your supplementary message..."></textarea>
-        <button type="submit" class="button">Send</button>
+        <button type="submit" class="button">
+            Send
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
     {/if}
 </div>

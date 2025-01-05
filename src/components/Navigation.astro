@@ -4,7 +4,7 @@ const { menu_items, logo } = Astro.props
 function normalizeUrl(url) {
     return url.replace(/\/$/, "");
 }
-const currentPath = normalizeUrl(Astro.url.pathname);
+const currentPath = normalizeUrl(Astro.url.pathname).split("/").pop();
 ---
 
 <nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow md:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
@@ -22,7 +22,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
             <ul class="nav-buttons font-extrabold flex gap-4 text-urika-blue-900 dark:text-urika-gray-300 text-md">
                 {menu_items.map((item) => (
                     <li class="hover:bg-urika-orange-400 dark:hover:bg-urika-blue-600 hover:text-white rounded-full transition">
-                        { normalizeUrl("/" + item.permalink) === currentPath ? (
+                        { item.permalink === currentPath ? (
                             <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-700 rounded-full cursor-default text-white uppercase">{item.title}</span>
                         ) : (
                             <a class="block px-4 py-2 uppercase" href={"/" + item.permalink} data-astro-prefetch>{item.title}</a>

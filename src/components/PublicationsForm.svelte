@@ -5,25 +5,28 @@ import { fade } from 'svelte/transition';
 import { directusFetch } from '../../lib/directusFetch.ts';
 const client = createDirectus('https://admin.urikabioworks.com').with(authentication()).with(rest());
 
-let { publication_id, publication_title } = $props();
+// from props
+export let publication_id;
+export let publication_title;
 
-// "Global" state that determines which form to show
-let step = $state('');
+// "global" state that determines which form to show
+let step = '';
+let loading = false;
 
 let userId = '';
-let email = $state('');
-let firstName = $state('');
-let lastName = $state('');
-let company = $state('');
-let title = $state('');
-let message = $state('');
-let otp = $state('');
+let email = '';
+let firstName = '';
+let lastName = '';
+let company = '';
+let title = '';
+let message = '';
+let otp = '';
 let accessToken = '';
 let refreshToken = '';
 let errorMessage = '';
 let alertMessage = '';
 
-// Called when user first visits page
+// called when user first visits page
 onMount(async () => {
     accessToken = localStorage.getItem('access_token');
     refreshToken = localStorage.getItem('refresh_token');
@@ -45,6 +48,7 @@ onMount(async () => {
 });
 
 async function handleEmailSubmit() {
+    loading = true;
     try {
         const res = await directusFetch(
             'https://admin.urikabioworks.com/flows/trigger/8dccc9f3-e88e-4d6f-be2b-85ec39d4a9d6',
@@ -65,11 +69,14 @@ async function handleEmailSubmit() {
     } catch (err) {
         console.error('Error in handleEmailSubmit:', err);
         errorMessage = 'Failed to submit email.';
+    } finally {
+        loading = false;
     }
 }
 
 async function handleRegistrationSubmit() {
     errorMessage = '';
+    loading = true;
     try {
         const res = await directusFetch('https://admin.urikabioworks.com/flows/trigger/91684db5-7bdb-47dd-8255-d6d7f1d7bea4',
             {
@@ -97,11 +104,14 @@ async function handleRegistrationSubmit() {
     } catch (err) {
         console.error('Error in handleRegistrationSubmit:', err);
         errorMessage = 'Failed to create user.';
+    } finally {
+        loading = false;
     }
 }
 
 async function handleOtpSubmit() {
     errorMessage = '';
+    loading = true;
     try {
         const res = await fetch('https://admin.urikabioworks.com/otp-login', {
             method: 'POST',
@@ -159,10 +169,13 @@ async function handleOtpSubmit() {
     } catch (err) {
         console.error('Error in handleOtpSubmit:', err);
         errorMessage = 'Failed to verify OTP.';
+    } finally {
+        loading = false;
     }
 }
 
 async function handleFileDownload() {
+    loading = true;
     try {
         const paper_id = await directusFetch(`https://admin.urikabioworks.com/items/publications?filter[id][_eq]=${publication_id}`);
         if (!paper_id.ok) throw new Error('Failed to fetch paper id');
@@ -175,24 +188,39 @@ async function handleFileDownload() {
         const url = URL.createObjectURL(blob);
         // Open the file in a new tab
         window.open(url, '_blank');
+        // hit the webhook to create a new Publications Read record
+        const readRes = await directusFetch('https://admin.urikabioworks.com/flows/trigger/e6002984-a859-4132-9044-bca316d0c98c', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, publication_id }),
+        });
+        if (!readRes.ok) throw new Error('Failed to trigger Publications Read webhook');
+
         // Optionally revoke the URL after some time to free up memory
         setTimeout(() => URL.revokeObjectURL(url), 60000);
     } catch (err) {
         console.error('Error fetching file:', err);
         errorMessage = 'Failed to download file.';
+    } finally {
+        loading = false;
     }
 }
 </script>
 
-<div class="min-w-96 mx-auto border border-zinc-200 dark:border-zinc-800 rounded-2xl px-8 py-4">
+<div class="flex flex-col h-full md:min-w-96 mx-auto border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-2 justify-center">
     {#if step === 'enter-email'}
     <form on:submit|preventDefault={handleEmailSubmit} in:fade={{ duration: 400 }}>
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Access Publication</h2>
             <p>Enter your email address to read the full document.</p>
         </div>
-        <input autofocus class="textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
-        <button class="button" type="submit">Next</button>
+        <input autofocus class="py-2 textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
+        <button class="button" type="submit">
+            Next
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
 
     {:else if step === 'registration'}
@@ -201,17 +229,22 @@ async function handleFileDownload() {
             <h2 class="text-center font-bold text-xl">Register</h2>
             <p>Let us know who you are!</p>
         </div>
-        <input disabled class="textinput text-base" type="email" bind:value={email} placeholder="your@address.com *" />
+        <input disabled class="py-2 textinput text-base" type="email" bind:value={email} placeholder="your@address.com *" />
         <div class="flex flex-col md:flex-row md:gap-4">
-            <input autofocus class="textinput text-base" type="text" bind:value={firstName} placeholder="First Name *" />
-            <input class="textinput text-base" type="text" bind:value={lastName} placeholder="Last Name *" />
+            <input autofocus class="py-2 textinput text-base" type="text" bind:value={firstName} placeholder="First Name *" />
+            <input class="py-2 textinput text-base" type="text" bind:value={lastName} placeholder="Last Name *" />
         </div>
         <div class="flex flex-col md:flex-row md:gap-4">
-            <input class="textinput text-base" type="text" bind:value={company} placeholder="Company *" />
-            <input class="textinput text-base" type="text" bind:value={title} placeholder="Title *" />
+            <input class="py-2 textinput text-base" type="text" bind:value={company} placeholder="Company *" />
+            <input class="py-2 textinput text-base" type="text" bind:value={title} placeholder="Title *" />
         </div>
-        <textarea class="textinput text-base" bind:value={message} placeholder="Your introductory message..."></textarea>
-        <button class="button" type="submit">Register</button>
+        <textarea class="py-2 textinput text-base" bind:value={message} placeholder="Your introductory message..."></textarea>
+        <button class="button" type="submit">
+            Register
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
 
     {:else if step === 'otp'}
@@ -220,17 +253,27 @@ async function handleFileDownload() {
             <h2 class="text-center font-bold text-xl">Verify</h2>
             <p>Please check your email for the <span class="font-bold text-urika-orange-400">verification code.</span></p>
         </div>
-        <input autofocus class="textinput" type="text" bind:value={otp} placeholder="000000" />
-        <button class="button" type="submit">Verify</button>
+        <input autofocus class="py-2 textinput" type="text" bind:value={otp} placeholder="000000" />
+        <button class="button" type="submit">
+            Verify
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </form>
 
     {:else if step === 'logged-in'}
-    <div class="flex flex-col text-center" in:fade={{ duration: 400 }}>
+    <div class="flex flex-col text-center" in:fade={{ duration: 400 }} disabled={loading}>
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Thank you, {firstName}.</h2>
             <p>Feel free to peruse our publications!</p>
         </div>
-        <button class="button" on:click={handleFileDownload}>ACCESS THE PAPER</button>
+        <button class="button" on:click={handleFileDownload}>
+            ACCESS THE PAPER
+            {#if loading}
+                <span class="spinner"></span>
+            {/if}
+        </button>
     </div>
     {/if}
 </div>
