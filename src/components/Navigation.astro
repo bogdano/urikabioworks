@@ -22,7 +22,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
             <ul class="nav-buttons font-extrabold flex gap-4 text-urika-blue-900 dark:text-urika-gray-300 text-md">
                 {menu_items.map((item) => (
                     <li class="hover:bg-urika-orange-400 dark:hover:bg-urika-blue-600 hover:text-white rounded-full transition">
-                        { normalizeUrl(item.permalink) === currentPath ? (
+                        { normalizeUrl("/" + item.permalink) === currentPath ? (
                             <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-700 rounded-full cursor-default text-white uppercase">{item.title}</span>
                         ) : (
                             <a class="block px-4 py-2 uppercase" href={"/" + item.permalink} data-astro-prefetch>{item.title}</a>
