@@ -32,7 +32,7 @@ const menu_items = global.main_menu.filter((item) => item.status === "published"
 	</body>
 
 	<script is:inline type="module" data-astro-rerun>
-   	    import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+	    const { animate, inView } = Motion
         inView(".fade-up", ({ target }) => {
           animate(target,
           		{ opacity: [0, 1], y: [20, 0] },

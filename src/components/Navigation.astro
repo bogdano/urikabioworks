@@ -25,7 +25,7 @@ const currentPath = normalizeUrl(Astro.url.pathname);
                         { normalizeUrl(item.permalink) === currentPath ? (
                             <span class="block w-full px-4 py-2 bg-urika-blue-900 dark:bg-urika-orange-700 rounded-full cursor-default text-white uppercase">{item.title}</span>
                         ) : (
-                            <a class="block px-4 py-2 uppercase" href={item.permalink} data-astro-prefetch>{item.title}</a>
+                            <a class="block px-4 py-2 uppercase" href={"/" + item.permalink} data-astro-prefetch>{item.title}</a>
                         )}
                     </li>
                 ))}

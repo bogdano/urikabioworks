@@ -1,0 +1,36 @@
+---
+import "../../styles/urika.css"
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PublicationsForm from '../../components/PublicationsForm.svelte'
+import Header from '../../components/blocks/Header.astro'
+import directus from "../../../lib/directus"
+import { readItems } from '@directus/sdk';
+
+export async function getStaticPaths() {
+    const publications = await directus.request(readItems("publications", {
+        filter: {
+            status: { _eq: "published" },
+        },
+        fields: ["title", "permalink", "abstract", "id"],
+    }))
+    return publications.map((publication) => ({
+        params: { permalink: publication.permalink },
+        props: publication,
+    }))
+}
+const publication = Astro.props
+---
+
+<BaseLayout title="URIKA [publication]">
+    <Header title="PUBLICATION" branded="true" />
+    <h1 class="fade-in font-serif text-4xl text-center my-8 font-extrabold">{publication.title}</h1>
+    <div class="flex flex-col lg:flex-row gap-10">
+        <div class="flex flex-col">
+            <h2 class="fade-in text-4xl font-extrabold text-center mt-4 text-urika-blue-800 dark:text-urika-orange-500">ABSTRACT</h2>
+            <p class="fade-in mt-4 indent-16 text-justify text-xl font-serif">{publication.abstract}</p>
+        </div>
+        <div class="lg:my-16 flex">
+            <PublicationsForm publication_id={publication.id} publication_title={publication.title} client:load />
+        </div>
+    </div>
+</BaseLayout>

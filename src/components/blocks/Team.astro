@@ -26,7 +26,7 @@ const members = team_members.filter((member) => member.section.section === block
 </div>
 
 <script is:inline type="module" data-astro-rerun define:vars={{ blockId: "#teamBlock-" + id }}>
-    import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+    const { animate, inView, stagger } = Motion
     inView(blockId, ({ target }) => {
         animate(blockId + "> .stagger-in",
          	{ opacity: [0, 1], x: [20, 0] },

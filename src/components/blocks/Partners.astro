@@ -40,7 +40,7 @@ const partners = await directus.request(readItems("partners", {
 </div>
 
 <script is:inline type="module" data-astro-rerun>
-    import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm"
+    const { animate, inView, stagger } = Motion
     inView(".stagger-container", ({ target }) => {
         animate(".stagger-in",
          	{ opacity: [0, 1], y: [20, 0] },
