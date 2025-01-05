@@ -167,12 +167,14 @@ article {
 .spinner {
     width: 1rem;
     height: 1rem;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
+    vertical-align: middle;
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     display: inline-block;
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: -1.75rem;
 }
 
 @keyframes spin {
