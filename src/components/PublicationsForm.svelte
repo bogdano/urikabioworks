@@ -235,7 +235,7 @@ async function downloadFile(newTab) {
     <form on:submit|preventDefault={handleRegistrationSubmit} in:fade={{ duration: 400 }}>
         {#if errorMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
-            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+                <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
             </div>
         {/if}
         <div class="flex flex-col justify-center my-4 text-center">
@@ -264,14 +264,14 @@ async function downloadFile(newTab) {
     <form on:submit|preventDefault={handleOtpSubmit} in:fade={{ duration: 400 }}>
         {#if errorMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
-            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+                <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
             </div>
         {/if}
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Verify</h2>
             <p>Please check your email for the <span class="font-bold text-urika-orange-400">verification code.</span></p>
         </div>
-        <input autofocus class="py-2 textinput text-center" type="text" bind:value={otp} placeholder="000000" />
+        <input autofocus class="py-2 textinput text-center" type="number" bind:value={otp} placeholder="000000" />
         <button class="button" type="submit">
             Verify
             {#if loading}
@@ -284,7 +284,7 @@ async function downloadFile(newTab) {
     <div class="flex flex-col text-center" in:fade={{ duration: 400 }} disabled={loading}>
         {#if errorMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
-            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+                <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
             </div>
         {/if}
         <div class="flex flex-col justify-center my-4 text-center">
