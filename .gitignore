@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 .netlify/
+
+package-lock.json
