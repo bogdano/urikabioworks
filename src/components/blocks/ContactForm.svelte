@@ -236,7 +236,7 @@
                 <p><span class="font-bold">Check your email</span> for your OTP code.</p>
             </div>
         {/if}
-        <input required autofocus class="textinput text-center" type="number" bind:value={otp} placeholder="000000" />
+        <input required autofocus class="textinput text-center" type="number" inputmode="decimal" bind:value={otp} placeholder="000000" />
         <button type="submit" class='button'>
             Verify
             {#if loading}

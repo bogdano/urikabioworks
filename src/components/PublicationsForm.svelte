@@ -272,7 +272,7 @@ async function downloadFile(newTab) {
             <h2 class="text-center font-bold text-xl">Verify</h2>
             <p>Please check your email for the <span class="font-bold text-urika-orange-400">verification code.</span></p>
         </div>
-        <input autofocus class="py-2 textinput text-center" type="number" bind:value={otp} placeholder="000000" />
+        <input autofocus class="py-2 textinput text-center" type="number" inputmode="decimal" bind:value={otp} placeholder="000000" />
         <button class="button" type="submit">
             Verify
             {#if loading}
