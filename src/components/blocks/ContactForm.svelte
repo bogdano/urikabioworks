@@ -38,7 +38,7 @@
             step = 'registration';
         }
         const firstField = document.getElementById('firstField');
-        setTimeout(() => firstField?.focus(), 600);
+        setTimeout(() => firstField?.focus(), 400);
     });
 
     async function handleEmailSubmit(e) {
@@ -97,8 +97,8 @@
 
     async function handleOtpSubmit() {
         loading = true;
+        errorMessage = '';
         try {
-            errorMessage = '';
             const res = await fetch('https://admin.urikabioworks.com/otp-login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -235,7 +235,7 @@
                 <p><span class="font-bold">Check your email</span> for your OTP code.</p>
             </div>
         {/if}
-        <input required autofocus class="textinput" type="text" bind:value={otp} placeholder="Enter OTP code" />
+        <input required autofocus class="textinput text-center" type="text" bind:value={otp} placeholder="Enter OTP code" />
         <button type="submit" class='button'>
             Verify
             {#if loading}

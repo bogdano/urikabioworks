@@ -23,7 +23,6 @@ let otp = '';
 let accessToken = '';
 let refreshToken = '';
 let errorMessage = '';
-let alertMessage = '';
 
 // called when user first visits page
 onMount(async () => {
@@ -41,12 +40,10 @@ onMount(async () => {
     } else {
         step = 'enter-email';
     }
-
-    const firstField = document.getElementById('firstField');
-    setTimeout(() => firstField?.focus(), 400);
 });
 
 async function handleEmailSubmit() {
+    errorMessage = '';
     loading = true;
     try {
         const res = await directusFetch(
@@ -61,7 +58,6 @@ async function handleEmailSubmit() {
         if (data.user_exists) {
             step = 'otp';
             userId = data.id;
-            alertMessage = 'We already have your email address on file.';
         } else {
             step = 'registration';
         }
@@ -160,7 +156,6 @@ async function handleOtpSubmit() {
                 throw new Error('Failed to trigger Lead activation webhook');
             }
             message = '';
-            alertMessage = "You've logged in.";
             step = 'logged-in';
         } else {
             throw new Error(response.message);
@@ -181,6 +176,7 @@ function handleFileDownload() {
 }
 
 async function downloadFile(newTab) {
+    errorMessage = '';
     loading = true;
     try {
         const paper_id = await directusFetch(`https://admin.urikabioworks.com/items/publications?filter[id][_eq]=${publication_id}`);
@@ -217,11 +213,16 @@ async function downloadFile(newTab) {
 <div class="flex flex-col h-full md:min-w-96 mx-auto border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-2 justify-center">
     {#if step === 'enter-email'}
     <form on:submit|preventDefault={handleEmailSubmit} in:fade={{ duration: 400 }}>
+        {#if errorMessage}
+            <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
+            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+            </div>
+        {/if}
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Access Publication</h2>
             <p>Enter your email address to read the full document.</p>
         </div>
-        <input autofocus class="py-2 textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
+        <input required autofocus class="py-2 textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
         <button class="button" type="submit">
             Next
             {#if loading}
@@ -232,20 +233,25 @@ async function downloadFile(newTab) {
 
     {:else if step === 'registration'}
     <form on:submit|preventDefault={handleRegistrationSubmit} in:fade={{ duration: 400 }}>
+        {#if errorMessage}
+            <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
+            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+            </div>
+        {/if}
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Register</h2>
             <p>Let us know who you are!</p>
         </div>
         <input disabled class="py-2 textinput text-base" type="email" bind:value={email} placeholder="your@address.com *" />
         <div class="flex flex-col md:flex-row md:gap-4">
-            <input autofocus class="py-2 textinput text-base" type="text" bind:value={firstName} placeholder="First Name *" />
-            <input class="py-2 textinput text-base" type="text" bind:value={lastName} placeholder="Last Name *" />
+            <input required autofocus class="py-2 textinput text-base" type="text" bind:value={firstName} placeholder="First Name *" />
+            <input required class="py-2 textinput text-base" type="text" bind:value={lastName} placeholder="Last Name *" />
         </div>
         <div class="flex flex-col md:flex-row md:gap-4">
-            <input class="py-2 textinput text-base" type="text" bind:value={company} placeholder="Company *" />
-            <input class="py-2 textinput text-base" type="text" bind:value={title} placeholder="Title *" />
+            <input required class="py-2 textinput text-base" type="text" bind:value={company} placeholder="Company *" />
+            <input required class="py-2 textinput text-base" type="text" bind:value={title} placeholder="Title *" />
         </div>
-        <textarea class="py-2 textinput text-base" bind:value={message} placeholder="Your introductory message..."></textarea>
+        <textarea required class="py-2 textinput text-base" bind:value={message} placeholder="Your introductory message..."></textarea>
         <button class="button" type="submit">
             Register
             {#if loading}
@@ -256,11 +262,16 @@ async function downloadFile(newTab) {
 
     {:else if step === 'otp'}
     <form on:submit|preventDefault={handleOtpSubmit} in:fade={{ duration: 400 }}>
+        {#if errorMessage}
+            <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
+            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+            </div>
+        {/if}
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Verify</h2>
             <p>Please check your email for the <span class="font-bold text-urika-orange-400">verification code.</span></p>
         </div>
-        <input autofocus class="py-2 textinput" type="text" bind:value={otp} placeholder="000000" />
+        <input autofocus class="py-2 textinput text-center" type="text" bind:value={otp} placeholder="000000" />
         <button class="button" type="submit">
             Verify
             {#if loading}
@@ -271,6 +282,11 @@ async function downloadFile(newTab) {
 
     {:else if step === 'logged-in'}
     <div class="flex flex-col text-center" in:fade={{ duration: 400 }} disabled={loading}>
+        {#if errorMessage}
+            <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
+            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+            </div>
+        {/if}
         <div class="flex flex-col justify-center my-4 text-center">
             <h2 class="text-center font-bold text-xl">Thank you, {firstName}.</h2>
             <p>Feel free to peruse our publications!</p>

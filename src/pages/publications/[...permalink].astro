@@ -14,7 +14,7 @@ export async function getStaticPaths() {
         fields: ["title", "permalink", "abstract", "id"],
     }))
     return publications.map((publication) => ({
-        params: { permalink: publication.permalink },
+        params: { permalink: "/" + publication.permalink },
         props: publication,
     }))
 }
@@ -27,7 +27,9 @@ const publication = Astro.props
     <div class="flex flex-col lg:flex-row gap-10">
         <div class="flex flex-col">
             <h2 class="fade-in text-4xl md:text-5xl font-extrabold text-center mt-4 text-urika-blue-800 dark:text-urika-orange-500">ABSTRACT</h2>
-            <p class="fade-in mt-4 indent-16 text-justify text-xl font-serif">{publication.abstract}</p>
+            <div class="fade-in mt-4 *:indent-16 text-justify text-xl font-serif">
+                <Fragment set:html={publication.abstract} />
+            </div>
         </div>
         <div class="lg:mt-12">
             <PublicationsForm publication_id={publication.id} client:load />
