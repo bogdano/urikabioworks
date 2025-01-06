@@ -99,10 +99,11 @@
         loading = true;
         errorMessage = '';
         try {
+            const submitOtp = otp.toString();
             const res = await fetch('https://admin.urikabioworks.com/otp-login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId, otp }),
+                body: JSON.stringify({ userId, otp: submitOtp }),
             });
             const response = await res.json();
             if (response?.refresh_token) {
@@ -235,7 +236,7 @@
                 <p><span class="font-bold">Check your email</span> for your OTP code.</p>
             </div>
         {/if}
-        <input required autofocus class="textinput text-center" type="number" bind:value={otp} placeholder="Enter OTP code" />
+        <input required autofocus class="textinput text-center" type="number" bind:value={otp} placeholder="000000" />
         <button type="submit" class='button'>
             Verify
             {#if loading}

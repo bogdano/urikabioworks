@@ -108,10 +108,11 @@ async function handleOtpSubmit() {
     errorMessage = '';
     loading = true;
     try {
+        const submitOtp = otp.toString();
         const res = await fetch('https://admin.urikabioworks.com/otp-login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, otp }),
+            body: JSON.stringify({ userId, otp: submitOtp }),
         });
         const response = await res.json();
         if (response?.refresh_token) {
