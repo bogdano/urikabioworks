@@ -12,7 +12,7 @@ const global = await directus.request(readSingleton("global", { fields: ["logo"]
 </script>
 
 <div class="text-xl flex flex-col gap-4">
-    <div id="content" class="font-touche flex flex-col gap-8 md:text-xl text-lg md:text-justify text-balance md:mx-16 md:*:indent-12 *:text-pretty">
+    <div id="content" class="font-touche flex flex-col gap-8 md:text-xl text-lg md:text-justify text-balance md:mx-16 md:*:indent-12">
         <Fragment set:html={content} />
     </div>
     <img src={`https://admin.urikabioworks.com/assets/${global.logo}`} alt="URIKA Logo" class="w-36 my-12 mx-auto" />

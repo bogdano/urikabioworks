@@ -223,7 +223,7 @@ async function downloadFile(newTab) {
             <h2 class="text-center font-bold text-xl">Access Publication</h2>
             <p>Enter your email address to read the full document.</p>
         </div>
-        <input required autofocus class="py-2 textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
+        <input required class="py-2 textinput" type="email" bind:value={email} placeholder="your@address.com" autocomplete="on" />
         <button class="button" type="submit">
             Next
             {#if loading}
