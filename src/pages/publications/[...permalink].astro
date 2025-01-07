@@ -23,7 +23,7 @@ const publication = Astro.props
 
 <BaseLayout title="URIKA [publication]">
     <Header title="PUBLICATIONS" branded="true" link="/publications" />
-    <h1 class="fade-in text-zinc-700 dark:text-zinc-300 font-serif text-4xl md:text-5xl text-center mt-8 mb-4 font-extrabold">{publication.title}</h1>
+    <h1 class="fade-in text-zinc-700 dark:text-zinc-300 font-georgia text-4xl md:text-5xl text-center mt-8 mb-4 font-extrabold">{publication.title}</h1>
     <div class="flex flex-col items-center md:flex-row md:flex-wrap justify-center gap-1 md:gap-4 mb-6">
         {publication.authors.map((author, index) => (
             <div class="inline-flex fade-in text-xl md:text-2xl text-center font-extrabold text-urika-orange-600 dark:text-urika-orange-500">
@@ -39,7 +39,7 @@ const publication = Astro.props
     <div class="flex flex-col lg:flex-row gap-10">
         <div class="flex flex-col">
             <h3 class="fade-in text-4xl md:text-5xl font-extrabold text-center mt-4 text-urika-blue-800 dark:text-urika-blue-600">ABSTRACT</h3>
-            <div class="fade-in mt-4 *:indent-16 text-justify text-base md:text-xl font-serif">
+            <div class="fade-in mt-4 *:indent-16 text-justify text-base md:text-xl font-georgia">
                 <Fragment set:html={publication.abstract} />
             </div>
         </div>
