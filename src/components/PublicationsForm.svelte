@@ -216,7 +216,7 @@ async function downloadFile(newTab) {
     <form on:submit|preventDefault={handleEmailSubmit} in:fade={{ duration: 400 }}>
         {#if errorMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
-            <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
+                <p><span class="font-bold">ERROR: </span> {errorMessage}</p>
             </div>
         {/if}
         <div class="flex flex-col justify-center my-4 text-center">

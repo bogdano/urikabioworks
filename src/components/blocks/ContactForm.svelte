@@ -83,6 +83,7 @@
             if (data.user_created === true) {
                 step = 'otp';
                 userId = data.id[0];
+                alertMessage = 'Please let us make sure that we have your correct email address:';
             } else {
                 throw new Error('Failed to create user', data.error);
                 step = 'registration';
@@ -228,12 +229,12 @@
     <form in:fade={{ duration: 400 }} on:submit|preventDefault={handleOtpSubmit}>
         {#if errorMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-red-100 dark:bg-red-950 text-red-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
-                <p><span class="font-bold">OOPS. </span> {errorMessage}</p>
+                <p><span class="font-bold">OOPS.</span> {errorMessage}</p>
             </div>
         {:else if alertMessage}
             <div class="text-lg text-center px-12 py-6 rounded-2xl bg-lime-100 dark:bg-lime-950 text-lime-900 dark:text-white mb-6" in:fade={{ duration: 300 }}>
                 <p>{alertMessage}</p>
-                <p><span class="font-bold">Check your email</span> for your OTP code.</p>
+                <p><span class="font-bold">Check your email</span> for your verification code.</p>
             </div>
         {/if}
         <input required autofocus class="textinput text-center" type="number" inputmode="decimal" bind:value={otp} placeholder="000000" />
