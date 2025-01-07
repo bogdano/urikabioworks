@@ -26,7 +26,7 @@ const publication = Astro.props
     <h1 class="fade-in text-zinc-700 dark:text-zinc-300 font-georgia text-4xl md:text-5xl text-center mt-8 mb-4 font-extrabold">{publication.title}</h1>
     <div class="flex flex-col items-center md:flex-row md:flex-wrap justify-center gap-1 md:gap-4 mb-6">
         {publication.authors.map((author, index) => (
-            <div class="inline-flex fade-in text-xl md:text-2xl text-center font-extrabold text-urika-orange-600 dark:text-urika-orange-500">
+            <div class="inline-flex fade-in text-xl md:text-2xl text-center font-medium text-urika-orange-600 dark:text-urika-orange-500">
                 <h2>
                     {author.first_name}
                     {author.middle_name && ` ${author.middle_name}`}
