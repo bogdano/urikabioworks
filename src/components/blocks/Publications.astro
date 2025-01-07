@@ -11,7 +11,7 @@ const publications = await directus.request(readItems("publications", {
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     {publications.map((publication) => (
-        <a href={ "/publications/" + publication.permalink } data-astro-prefetch class="fade-in group relative flex flex-col gap-8 mb-8 text-zinc-700 dark:text-zinc-300 items-center border border-zinc-200 dark:border-zinc-800 shadow-lg hover:shadow-none transition-all dark:shadow-black rounded-2xl p-8 w-full hover:bg-zinc-50 dark:hover:bg-black">
+        <a href={ "/publications/" + publication.permalink } data-astro-prefetch class="fade-in group relative flex flex-col gap-8 mb-8 text-zinc-700 dark:text-zinc-300 items-center border border-zinc-200 dark:border-zinc-800 shadow-lg hover:shadow-none transition-colors transition-shadow dark:shadow-black rounded-2xl p-8 w-full hover:bg-zinc-50 dark:hover:bg-black">
             <h2 class="text-3xl font-bold leading-8 mb-1 font-georgia grow">{publication.title}</h2>
             <div class="flex flex-col w-full">
               {publication.authors.map((author) => (
