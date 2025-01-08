@@ -11,7 +11,7 @@ export async function getStaticPaths() {
         filter: {
             status: { _eq: "published" },
         },
-        fields: ["title", "permalink", "abstract", "id", "authors"],
+        fields: ["title", "permalink", "abstract", "id", "authors", "year"],
     }))
     return publications.map((publication) => ({
         params: { permalink: "/" + publication.permalink },
@@ -23,16 +23,17 @@ const publication = Astro.props
 
 <BaseLayout title="URIKA [publication]">
     <Header title="PUBLICATIONS" branded="true" link="/publications" />
-    <h1 class="fade-in text-zinc-700 dark:text-zinc-300 font-georgia text-4xl md:text-5xl text-center mt-8 mb-4 font-extrabold">{publication.title}</h1>
-    <div class="flex flex-col items-center md:flex-row md:flex-wrap justify-center gap-1 md:gap-4 mb-6">
+    <h1 class="fade-in text-zinc-700 dark:text-zinc-300 font-georgia text-4xl md:text-5xl text-center mt-8 mb-2 font-extrabold">{publication.title}</h1>
+    <p class="fade-in text-center text-xl md:text-3xl mb-2 text-zinc-400 dark:text-zinc-500 font-extrabold">{publication.year}</p>
+    <div id="authors" class="flex flex-col items-center md:flex-row md:flex-wrap justify-center mb-6 text-xl md:text-2xl">
         {publication.authors.map((author, index) => (
-            <div class="inline-flex fade-in text-xl md:text-2xl text-center font-medium text-urika-orange-600 dark:text-urika-orange-500">
+            <div class="inline-flex fade-in text-center font-medium text-urika-orange-600 dark:text-urika-orange-500" data-author>
                 <h2>
                     {author.first_name}
                     {author.middle_name && ` ${author.middle_name}`}
                     {` ${author.last_name}`}
                 </h2>
-                <p class="ml-4 hidden md:block">{index < publication.authors.length - 1 && "•"}</p>
+                <p class="mx-4 hidden md:block bullet">{index < publication.authors.length - 1 && "•"}</p>
             </div>
         ))}
     </div>
@@ -48,3 +49,38 @@ const publication = Astro.props
         </div>
     </div>
 </BaseLayout>
+
+<script type="module" is:inline data-astro-rerun>
+    document.addEventListener('astro:page-load', () => {
+        const authorElements = document.querySelectorAll('#authors [data-author]');
+        // initial run
+        removeEndOfRowBullets(authorElements);
+        // re-check on window resize
+        window.addEventListener('resize', () => {
+            // before recalculating, reset bullet display in case it was hidden previously
+            authorElements.forEach(el => {
+                const bullet = el.querySelector('.bullet');
+                if (bullet) bullet.style.display = '';
+            });
+            removeEndOfRowBullets(authorElements);
+        });
+    });
+
+    function removeEndOfRowBullets(authorElements) {
+        authorElements.forEach((el, index) => {
+            const nextEl = authorElements[index + 1];
+            // if there's no nextEl, don't hide bullet (last item in entire list)
+            if (!nextEl) return;
+
+            const currentRect = el.getBoundingClientRect();
+            const nextRect = nextEl.getBoundingClientRect();
+            // if the bottoms differ significantly => nextEl wrapped onto a new line
+            if (Math.abs(currentRect.bottom - nextRect.bottom) > 5) {
+                const bullet = el.querySelector('.bullet');
+                if (bullet) {
+                    bullet.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
