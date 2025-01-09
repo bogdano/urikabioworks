@@ -28,12 +28,12 @@ const publication = Astro.props
     <div id="authors" class="flex flex-col items-center md:flex-row md:flex-wrap justify-center mb-6 text-xl md:text-2xl">
         {publication.authors.map((author, index) => (
             <div class="inline-flex fade-in text-center font-medium text-urika-orange-600 dark:text-urika-orange-500" data-author>
-                <h2>
+                <h2 class="mx-4">
                     {author.first_name}
                     {author.middle_name && ` ${author.middle_name}`}
                     {` ${author.last_name}`}
                 </h2>
-                <p class="mx-4 hidden md:block bullet">{index < publication.authors.length - 1 && "•"}</p>
+                <span class="bullet hidden md:block">{index < publication.authors.length - 1 && "•"}</span>
             </div>
         ))}
     </div>
@@ -50,8 +50,15 @@ const publication = Astro.props
     </div>
 </BaseLayout>
 
-<script type="module" is:inline data-astro-rerun>
+<script type="module" data-astro-rerun>
     document.addEventListener('astro:page-load', () => {
+        init();
+    });
+    document.addEventListener('animationstart', () => {
+        init();
+    });
+
+    function init() {
         const authorElements = document.querySelectorAll('#authors [data-author]');
         // initial run
         removeEndOfRowBullets(authorElements);
@@ -60,11 +67,11 @@ const publication = Astro.props
             // before recalculating, reset bullet display in case it was hidden previously
             authorElements.forEach(el => {
                 const bullet = el.querySelector('.bullet');
-                if (bullet) bullet.style.display = '';
+                if (bullet) bullet.style.opacity = 100;
             });
             removeEndOfRowBullets(authorElements);
         });
-    });
+    }
 
     function removeEndOfRowBullets(authorElements) {
         authorElements.forEach((el, index) => {
@@ -78,7 +85,7 @@ const publication = Astro.props
             if (Math.abs(currentRect.bottom - nextRect.bottom) > 5) {
                 const bullet = el.querySelector('.bullet');
                 if (bullet) {
-                    bullet.style.display = 'none';
+                    bullet.style.opacity = 0;
                 }
             }
         });

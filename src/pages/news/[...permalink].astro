@@ -1,0 +1,26 @@
+---
+import "../../styles/urika.css"
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Header from '../../components/blocks/Header.astro'
+import directus from "../../../lib/directus"
+import { readItems } from '@directus/sdk';
+
+export async function getStaticPaths() {
+    const news = await directus.request(readItems("news", {
+        filter: {
+            status: { _eq: "published" },
+        },
+        fields: ["title", "permalink", "image", "content"],
+    }))
+    return news.map((news_item) => ({
+        params: { permalink: "/" + news_item.permalink },
+        props: news_item,
+    }))
+}
+const news_item = Astro.props
+---
+
+<BaseLayout title="URIKA [news]">
+    <Header title="NEWS" branded="true" link="/news" />
+
+</BaseLayout>

@@ -1,0 +1,10 @@
+---
+import directus from "../../../lib/directus"
+import { readItems } from '@directus/sdk';
+const publications = await directus.request(readItems("news", {
+    filter: {
+        status: { _eq: "published" },
+    },
+    fields: ["title", "permalink", "image", "content"],
+}))
+---
