@@ -7,19 +7,19 @@ function normalizeUrl(url) {
 const currentPath = normalizeUrl(Astro.url.pathname).split("/").pop();
 ---
 
-<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow md:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow lg:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
     <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
         <span class="menu-btn__burger"></span>
     </button>
 
-    <a href="/" id="upper-logo" class="flex items-center mx-auto opacity-0 transition-opacity duration-500 pr-12 md:p-0 md:ml-4 md:mr-4">
+    <a href="/" id="upper-logo" class="flex items-center mx-auto opacity-0 transition-opacity duration-500 pr-12 lg:p-0 lg:ml-4 lg:mr-4">
         <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="h-8" />
         <span class="text-urika-gray-400 dark:text-urika-gray-300 font-urika text-xl font-semibold ml-2 mr-2">URIKA</span>
     </a>
 
-    <div id="nav-wrapper" class="bg-white dark:bg-zinc-950/20 md:bg-white/0 dark:md:bg-white/0 nav-wrapper flex backdrop-blur-lg md:backdrop-blur-none md:dark:border-none dark:border-r dark:border-zinc-800" transition:name="menu">
+    <div id="nav-wrapper" class="bg-white dark:bg-zinc-950/20 lg:bg-white/0 dark:lg:bg-white/0 nav-wrapper flex backdrop-blur-lg lg:backdrop-blur-none lg:dark:border-none dark:border-r dark:border-zinc-800" transition:name="menu">
         <div id="main-navigation" class="grow">
-            <ul class="nav-buttons font-extrabold flex gap-4 text-urika-blue-900 dark:text-urika-gray-300 text-md">
+            <ul class="nav-buttons font-extrabold flex gap-2 text-urika-blue-900 dark:text-urika-gray-300 text-md">
                 {menu_items.map((item) => (
                     <li class="hover:bg-urika-orange-400 dark:hover:bg-urika-blue-600 hover:text-white rounded-full transition">
                         { item.permalink === currentPath ? (
@@ -31,8 +31,8 @@ const currentPath = normalizeUrl(Astro.url.pathname).split("/").pop();
                 ))}
             </ul>
         </div>
-        <div id="secondary-navigation" class="flex md:justify-end justify-between w-full md:w-36 md:pr-4">
-            <div class="flex items-end md:items-center pl-2 md:pl-0"><ThemeToggle /></div>
+        <div id="secondary-navigation" class="flex lg:justify-end justify-between w-full lg:w-36 lg:pr-4">
+            <div class="flex items-end lg:items-center pl-2 lg:pl-0"><ThemeToggle /></div>
             <img src={`https://admin.urikabioworks.com/assets/${logo}`} alt="URIKA Logo" class="mobile-only h-12" />
         </div>
     </div>
