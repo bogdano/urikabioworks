@@ -4,7 +4,7 @@ const { menu_items, logo } = Astro.props
 function normalizeUrl(url) {
     return url.replace(/\/$/, "");
 }
-const currentPath = normalizeUrl(Astro.url.pathname).split("/").pop();
+const currentPath = normalizeUrl(Astro.url.pathname).split("/")[1];
 ---
 
 <nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow lg:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
