@@ -26,3 +26,5 @@ pnpm-debug.log*
 .netlify/
 
 package-lock.json
+
+public/google7f9f6871ef7345f2.html
