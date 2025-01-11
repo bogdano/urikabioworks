@@ -7,7 +7,7 @@ function normalizeUrl(url) {
 const currentPath = normalizeUrl(Astro.url.pathname).split("/")[1] || "";
 ---
 
-<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2.5 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow lg:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
+<nav id="navigation" class="fixed top-0 flex items-center px-4 py-2 z-50 bg-white/80 dark:bg-zinc-950/80 w-full transition-shadow lg:backdrop-blur border-b border-urika-gray-100 dark:border-zinc-800">
     <button class="menu-btn mobile-only p-4 pl-2 rounded-full outline-none" id="menu-button" aria-label="Menu">
         <span class="menu-btn__burger"></span>
     </button>
