@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/netlify": "^6.0.1",
+    "@astrojs/netlify": "^6.1.0",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/svelte": "^7.0.3",
     "@astrojs/tailwind": "^5.1.4",
     "@directus/sdk": "^18.0.0",
-    "astro": "^5.1.4",
+    "astro": "^5.1.7",
     "svelte": "^5.14.4",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.7.2"
