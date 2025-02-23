@@ -10,20 +10,23 @@ import Header from "../../components/blocks/Header.astro"
             height: 600px;
         }
     </style>
-    <Header title="GUSELKUMAB" branded="true" />
+    <Header title="TNF" branded="true" />
     <div id="chart"></div>
 </BaseLayout>
 
 <script is:inline type="module">
     const files = {
-        firstApproval: '/timeline/timeline_guselkumab_approval.json',
-        publicationsCausal: '/timeline/timeline_guselkumab_publications_causal.json',
-        publicationsSemantic: '/timeline/timeline_guselkumab_publications_semantic.json',
-        grantsCausal: '/timeline/timeline_guselkumab_grants_causal.json',
-        grantsSemantic: '/timeline/timeline_guselkumab_grants_semantic.json',
-        patentsCausal: '/timeline/timeline_guselkumab_patents_causal.json',
-        patentsSemantic: '/timeline/timeline_guselkumab_patents_semantic.json',
-        clinicalTrials: '/timeline/timeline_guselkumab_clinicaltrials.json'
+        // The JSON file for first approval might still return a single row or single value.
+        firstApproval: '/timeline/timeline_tnf_approval.json',
+
+        // The rest should now be in the new format (year, relationshipCount).
+        publicationsCausal: '/timeline/timeline_tnf_publications_causal.json',
+        publicationsSemantic: '/timeline/timeline_tnf_publications_semantic.json',
+        grantsCausal: '/timeline/timeline_tnf_grants_causal.json',
+        grantsSemantic: '/timeline/timeline_tnf_grants_semantic.json',
+        patentsCausal: '/timeline/timeline_tnf_patents_causal.json',
+        patentsSemantic: '/timeline/timeline_tnf_patents_semantic.json',
+        clinicalTrials: '/timeline/timeline_tnf_clinicaltrials.json'
     };
 
     // Utility function to load a JSON file
@@ -31,33 +34,24 @@ import Header from "../../components/blocks/Header.astro"
         return fetch(file).then(response => response.json());
     }
 
-    // Convert a date string in "YYYYMMDD" format to an ISO string "YYYY-MM-DD"
-    function toISODate(dateStr) {
-        if (dateStr && dateStr.length === 8) {
-            return dateStr.slice(0,4) + '-' + dateStr.slice(4,6) + '-' + dateStr.slice(6,8);
-        }
-        return dateStr;
-    }
-
-    // Extract dates from JSON, converting them to ISO format.
-    // Assumes each JSON has a "results" array.
-    function extractDates(json) {
+    /**
+     * Extract (year, count) data from a JSON object in the new format:
+     * {
+     *   "results": [
+     *     { "year": "1988", "relationshipCount": 2 },
+     *     { "year": "1990", "relationshipCount": 6 },
+     *     ...
+     *   ]
+     * }
+     */
+    function extractYearData(json) {
         if (!json || !json.results) return [];
         return json.results.map(item => {
-            let d;
-            if (typeof item === 'object' && item !== null) {
-                // Extract the first property value from the object.
-                d = Object.values(item)[0];
-            } else {
-                d = item;
-            }
-            return toISODate(d);
-      });
-    }
-
-    // Utility: Given an ISO date string ("YYYY-MM-DD"), return the month part ("YYYY-MM")
-    function getYear(dateStr) {
-        return dateStr.slice(0, 4);
+            return {
+                year: item.year,
+                count: Number(item.relationshipCount) || 0
+            };
+        });
     }
 
     // Load all JSON files concurrently.
@@ -70,13 +64,18 @@ import Header from "../../components/blocks/Header.astro"
                 data[key] = dataArray[idx++];
             }
 
-            // Process the firstApproval file.
+            // Process the firstApproval file (still in the old format?)
+            // If your "firstApproval" file also changed to a year/count format,
+            // you can adapt it similarly to extract a .year instead.
             let firstApprovalYear = null;
             if (data.firstApproval && data.firstApproval.results && data.firstApproval.results.length) {
+                // Example: if the old "first_approval" was stored as a single numeric year
+                // or a single date string, parse it here.
                 firstApprovalYear = Number(Object.values(data.firstApproval.results[0])[0]);
             }
 
             // Define each series (line) for the chart.
+            // These correspond to the new year/count JSON structure.
             const seriesDefinitions = [
                 { name: 'Publications (Causal)', key: 'publicationsCausal' },
                 { name: 'Publications (Semantic)', key: 'publicationsSemantic' },
@@ -87,33 +86,40 @@ import Header from "../../components/blocks/Header.astro"
                 { name: 'Clinical Trials', key: 'clinicalTrials' }
             ];
 
-            // For each series, extract date events (in ISO format), convert them to year ("YYYY"), and count occurrences per year.
+            // We'll store year -> count data in a map for each series
+            // and collect a set of all years across all series.
             const seriesDataMap = {};
-            // Also collect a set of all unique years.
             const allYearsSet = new Set();
+
             seriesDefinitions.forEach(def => {
-                const dates = extractDates(data[def.key]);
-                // Count events per month.
+                // Extract the pre-aggregated data {year, count} from the new JSON format.
+                const items = extractYearData(data[def.key]);
                 const countByYear = {};
-                dates.forEach(date => {
-                    if (!date) return;
-                    const year = getYear(date);
-                    countByYear[year] = (countByYear[year] || 0) + 1;
+
+                items.forEach(({ year, count }) => {
+                    // If your query ensures unique "year" rows, you can directly assign.
+                    // If there's a possibility of duplicates, you might sum them:
+                    // countByYear[year] = (countByYear[year] || 0) + count;
+                    countByYear[year] = count;
                     allYearsSet.add(year);
                 });
+
                 seriesDataMap[def.key] = countByYear;
             });
 
-            // Create a sorted array of all unique years.
+            // Create a sorted array of all unique years (strings).
             const allYears = Array.from(allYearsSet).sort();
 
-            // For each series, create an array of data points [timestamp, count] for every year in allYears.
+            // Convert years into ECharts time-axis data (timestamps).
+            // For each series, create an array of [timestamp, count].
             const echartsSeries = seriesDefinitions.map(def => {
                 const countByYear = seriesDataMap[def.key];
                 const dataPoints = allYears.map(year => {
-                    const timestamp = new Date(year).getTime();
+                    // Convert "YYYY" to a Date, use January 1st of that year.
+                    const timestamp = new Date(parseInt(year, 10), 0, 1).getTime();
                     return [timestamp, countByYear[year]];
                 });
+
                 return {
                     name: def.name,
                     type: 'line',
@@ -126,11 +132,11 @@ import Header from "../../components/blocks/Header.astro"
             const chartDom = document.getElementById('chart');
             const myChart = echarts.init(chartDom);
 
-            // Base option for the chart.
             const option = {
                 tooltip: {
                     trigger: 'axis',
                     formatter: function (params) {
+                        // All lines share the same x-axis value in "params"
                         const date = new Date(params[0].data[0]);
                         let tooltip = date.getFullYear() + '<br/>';
                         params.forEach(item => {
@@ -157,11 +163,11 @@ import Header from "../../components/blocks/Header.astro"
                 series: echartsSeries
             };
 
-            // If firstApprovalYear exists, add a highlighted markArea covering that entire year.
+            // Highlight the firstApproval year (if available).
             if (firstApprovalYear) {
+                // Mark area for the first series only as an example.
                 const startTimestamp = new Date(firstApprovalYear, 0, 1).getTime();
                 const endTimestamp = new Date(firstApprovalYear + 1, 0, 1).getTime();
-                // Attach markArea to the first series
                 echartsSeries[0].markArea = {
                     silent: true,
                     data: [
@@ -177,7 +183,6 @@ import Header from "../../components/blocks/Header.astro"
                 };
             }
 
-            // Render the chart.
             myChart.setOption(option);
         })
         .catch(error => {
