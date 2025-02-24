@@ -10,21 +10,20 @@ import Header from "../../components/blocks/Header.astro"
             height: 600px;
         }
     </style>
-    <Header title="TNF" branded="true" />
+    <Header title="TNFSF12" branded="true" />
     <div id="chart"></div>
 </BaseLayout>
 
 <script is:inline type="module">
     const files = {
-
         // The rest should now be in the new format (year, relationshipCount).
-        publicationsCausal: '/timeline/timeline_tnf_publications_causal.json',
-        publicationsSemantic: '/timeline/timeline_tnf_publications_semantic.json',
-        grantsCausal: '/timeline/timeline_tnf_grants_causal.json',
-        grantsSemantic: '/timeline/timeline_tnf_grants_semantic.json',
-        patentsCausal: '/timeline/timeline_tnf_patents_causal.json',
-        patentsSemantic: '/timeline/timeline_tnf_patents_semantic.json',
-        clinicalTrials: '/timeline/timeline_tnf_clinicaltrials.json'
+        publicationsCausal: '/timeline/timeline_tnfsf12_publications_causal.json',
+        publicationsSemantic: '/timeline/timeline_tnfsf12_publications_semantic.json',
+        grantsCausal: '/timeline/timeline_tnfsf12_grants_causal.json',
+        grantsSemantic: '/timeline/timeline_tnfsf12_grants_semantic.json',
+        patentsCausal: '/timeline/timeline_tnfsf12_patents_causal.json',
+        patentsSemantic: '/timeline/timeline_tnfsf12_patents_semantic.json',
+        clinicalTrials: '/timeline/timeline_tnfsf12_clinicaltrials.json'
     };
 
     // Utility function to load a JSON file
